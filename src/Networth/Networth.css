@@ -1,0 +1,38 @@
+.addMenu{
+    background-color: gray;
+    max-width: 200px;
+    height: 200px;
+    z-index: 1;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.profile{
+    display: flex;
+    margin-top: 10%;
+    flex-direction: row;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    border: solid black 3px;
+    font-size: 22px;
+}
+
+.List{
+    list-style-type: none;
+}
+.input{
+    border: solid black 2px;  
+    height: 22px;
+}
+.Networth{
+    height: 100vh;
+}
+.report{
+height: 300px;
+font-size: 16px;
+}
+.lineChartSvg{
+    border: black solid 5px
+}

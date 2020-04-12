@@ -1,0 +1,56 @@
+#mainTitle, #mainTitle>a:visited, #mainTitle>a:active, #mainTitle>a:hover{
+    margin-top: 30px;
+    font-size: 35px;
+    color: white 
+}
+
+.App-header{
+    background-color: #282c34;
+     /* background-color: #152950; */
+    color: white;
+    height: 140px;
+   
+  }
+
+  #topLeftNav{
+      display: flex;
+      height: 20px;
+      justify-content: space-between;
+      max-width: 150px;
+      align-content: flex-end;
+      margin-right: 10px;
+      margin-left: auto;
+      font-size: 22px;
+  }
+
+  .Nav{
+    position: sticky;
+    top:0;
+    margin: 0;
+  }
+  .burgerIcon{
+      color: white;
+      font-size: 28px;
+      display: flex;
+      margin-left: 10px
+  }
+
+#nav-leader{
+    background-color: #282c34;
+    text-align: left;
+    padding: 5px;
+    max-width: 200px;
+    top: 47px;
+    position: absolute; 
+    color: white;
+    max-height: 125px;
+    margin: 0;
+    z-index: 2;
+}
+.menuLink:visited, .menuLink:active{
+color: white 
+}
+
+.Menu{
+    width: 50px;
+}
