@@ -19,18 +19,18 @@ export default class NetworthPie extends Component {
     let arc=d3.arc()
     .innerRadius(0)
     .outerRadius(100);
-    let interpolate=d3.interpolateRgb("#152950","#bc3358");
-  return (
+    let colors=d3.interpolateRgb("#152950","#738683");
+    return (
     <>
     {total===0
         ?(<><br/><i>Add values below to see a breakdown</i></>)
     :( <svg className='report'>
             <g transform={`translate(${width/2},${height/2})`}>
                 {pie.map((slice, index)=>{
-                    let sliceColor= interpolate(index/(pie.length-1));
-                    return <path key={slice.index} d={arc(slice)} fill={sliceColor}/>
+                    let sliceColor= colors(index/(pie.length-1));
+                    return <path key={slice.index} d={arc(slice)} fill={sliceColor} />
                 })}
-                <text textAnchor='middle'  fill='white'>
+                <text textAnchor='middle' x="0" y="125" fill='black'>
                     {data.map((data)=>{
                         return `${data.name}: ${Math.round(data.value)}%`})
                     }  

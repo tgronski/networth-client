@@ -9,7 +9,7 @@
 
 .profile{
     display: flex;
-    margin-top: 10%;
+    margin-top: 6%;
     flex-direction: row;
     justify-content: center;
     margin-left: auto;
@@ -17,6 +17,7 @@
     width: 80%;
     border: solid black 3px;
     font-size: 22px;
+    text-decoration: center;
 }
 
 .List{
@@ -30,8 +31,22 @@
     height: 100vh;
 }
 .report{
-height: 300px;
+height: 225px;
+width: 200px;
 font-size: 16px;
+}
+.list{
+    display: flex; 
+    align-content: center;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 200px;
+    width:700px;
+    list-style-type: none;
+    border: solid black 2px;
+    padding: 20px;
+    margin-left: auto;
+    margin-right: auto
 }
 .lineChartSvg{
     border: black solid 5px

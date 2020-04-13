@@ -6,16 +6,19 @@ import { Link } from "react-router-dom";
 
 export default class Preview extends Component{
 
+    
+
     render(){
-    const data=[{value: 30, name: "Debts "},{value: 70, name: " Assets"}]
-    const height=400;
-    const width=400;
-    let pie=d3.pie()(data.map((data)=>data.value))
-    let arc=d3.arc()
-    .innerRadius(0)
-    .outerRadius(100);
-    let interpolate=d3.interpolateRgb("#152950","#bc3358");
-  
+        let data=[{value: 30, name: "Debts"},{value: 70, name: `${" "}Assets`}]
+        let width=400
+        let height= 400
+        let pie=d3.pie()(data.map((data)=>data.value))
+        let arc=d3.arc()
+        .innerRadius(0)
+        .outerRadius(100);
+        let colors=d3.interpolateRgb("#152950","#738683");
+
+
   return (
     <div className="Preview">
         <section className='Preview-total'>
@@ -24,22 +27,29 @@ export default class Preview extends Component{
         <br/>
         <h2>Add goals and learn more about how you can save.</h2>
         </section>
-        <svg className="Pie">
-            <g transform={`translate(${width/2},${height/2})`}>
+    
+        <svg className="Pie" >
+            <g transform={`translate(${width/2},${height/2})`}  >
                 {pie.map((slice, index)=>{
-                    let sliceColor= interpolate(index/(pie.length-1));
-                    return <path key={slice.index} d={arc(slice)} fill={sliceColor}/>
+                  
+                    let sliceColor= colors(index/(pie.length-1));
+                    return  <path key={slice.index} d={arc(slice)} fill={sliceColor}  />
+                
                 })}
-                <text textAnchor='middle'  fill='white'>
+                
+                <text textAnchor='middle' x='1' y='-8' fontSize="14" fill='white'>
                     {data.map((data)=>{
-                        return `${data.name}`})
+                        return `${"  "}${data.name}: ${Math.round(data.value)}%${"  "} `
+                    })
+                    
                     }  
                         
                 </text>
             </g>
         </svg>
+      
         </section>
     </div>
   );
-}
+    }
 }

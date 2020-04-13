@@ -28,6 +28,9 @@ g{
 .mainLink:active, .mainLink:visited{
 color: #152950;
 }
+.pieChart{
+    margin: 100px
+}
 .Preview-total{
     display: flex;
     flex-direction: row;
