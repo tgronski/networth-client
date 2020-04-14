@@ -32,7 +32,7 @@
 }
 .report{
 height: 225px;
-width: 200px;
+max-width: 200px;
 font-size: 16px;
 }
 .list{
@@ -41,7 +41,7 @@ font-size: 16px;
     flex-direction: column;
     justify-content: space-evenly;
     height: 200px;
-    width:700px;
+    max-width:700px;
     list-style-type: none;
     border: solid black 2px;
     padding: 20px;

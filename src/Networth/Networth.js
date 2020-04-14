@@ -2,6 +2,10 @@ import React, {Component} from 'react';
 import './Networth.css'
 import NetworthPie from './NetworthPie';
 import Goals from './Goals'
+import { faCreditCard, faLandmark, faHandHoldingUsd, faPiggyBank, faMoneyBillAlt, faMoneyCheck} from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Overtime from "./Overtime"
+import Resources from './Resources'
 
 export default class Networth extends Component {
   constructor(props){
@@ -13,10 +17,12 @@ export default class Networth extends Component {
         investments: 0,
         loans: 0,
         savings: 0,
+        otherDebt: 0,
+        otherAssets: 0,
         total: 0,
-        month: "Jan",
-        entries: [{}],
-        resources: null
+        entries: [],
+        resources: null,
+        networth: false
     }
   }
   handleCredit=(e)=>{
@@ -26,7 +32,7 @@ export default class Networth extends Component {
       value=0
     }
 
-    this.setState({credit: value})
+    this.setState({networth: false, credit: value})
   }
   handleInvestments=(e)=>{
     e.preventDefault();
@@ -35,7 +41,7 @@ export default class Networth extends Component {
       value=0
     }
  
-    this.setState({investments: value})
+    this.setState({networth: false,investments: value})
   }
   handleSavings=(e)=>{
     e.preventDefault();
@@ -44,7 +50,7 @@ export default class Networth extends Component {
       value=0
     }
 
-    this.setState({savings: value})
+    this.setState({networth: false, savings: value})
   }
   handleLoans=(e)=>{
     e.preventDefault();
@@ -53,12 +59,25 @@ export default class Networth extends Component {
       value=0
     }
   
-    this.setState({loans: value})
-  }
-  handleEntry=(e)=>{
+    this.setState({networth: false,loans: value})
+  }  
+  handleOtherAssets=(e)=>{
     e.preventDefault();
-    let entryMonth=e.target.value
-    this.setState({month: entryMonth})
+    let value=e.target.value.replace('-e','')
+    if(value===''){
+      value=0
+    }
+  
+    this.setState({networth: false,otherAssets: value})
+  }
+  handleOtherDebt=(e)=>{
+    e.preventDefault();
+    let value=e.target.value.replace('-e','')
+    if(value===''){
+      value=0
+    }
+  
+    this.setState({networth: false,otherDebt: value})
   }
 
   handleSubmit(e){
@@ -67,30 +86,24 @@ export default class Networth extends Component {
     let investments=parseInt(this.state.investments)
     let savings = parseInt(this.state.savings)
     let loans = parseInt(this.state.loans)
+    let otherDebt = parseInt(this.state.otherDebt)
+    let otherAssets = parseInt(this.state.otherAssets)
     let resources = this.state.resources
+    let now= new Date().toDateString()
     if(credit>0 || loans >0){
       resources = true
     }
     else resources = false
-    let total=investments  - credit  + savings - loans
+    let total=investments  - credit  + savings - loans - otherDebt + otherAssets
     this.setState({total: total,
     entries: [ ...this.state.entries,
-      {month: this.state.month, total: total}],
-    resources: resources})
-    
+      {time: now , total: total}],
+    resources: resources, networth: true})
+    console.log(this.state)
   }
 
   render(){
   
-  let months= ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec"]
-  const options = months.map(month => {
-    return (
-      <option>
-        {month}
-      </option>
-    );
-  });
-  let entries = this.state.entries
   return (
     <div className="Networth">
       <h1>Your personalized financial planning dashboard:</h1>
@@ -106,69 +119,44 @@ export default class Networth extends Component {
           <NetworthPie credit={this.state.credit} loans={this.state.loans} savings={this.state.savings} investments={this.state.investments}/>
       
           <br/> <br/>
-          <label htmlFor='Credit-Card'>Credit Card $: {' '}</label>
+          <label htmlFor='Credit-Card'><FontAwesomeIcon icon={faCreditCard}/>{' '}Credit Card Bill $: {' '}</label>
           <input type='number' className='input'  onChange={e=>this.handleCredit(e)}></input>
           <br/>
-          <label htmlFor='Investments'>Investments (Stocks/Bonds) $: {' '}</label>
+          <label htmlFor='Investments'><FontAwesomeIcon icon={faLandmark}/>{' '}Investments (Stocks/Bonds) $: {' '}</label>
           <input type='number' className='input'  onChange={e=>this.handleInvestments(e)}></input>
           <br/>
-          <label htmlFor='Loans'>Loans $: {' '}</label>
+          <label htmlFor='Loans'><FontAwesomeIcon icon={faHandHoldingUsd}/>{' '}Loans $: {' '}</label>
           <input type='number' className='input'  onChange={e=>this.handleLoans(e)}></input>
           <br/>
-          <label htmlFor='Savings'>Savings $: {' '}</label>
+          <label htmlFor='Savings'><FontAwesomeIcon icon={faPiggyBank }/>{' '}Savings $: {' '}</label>
           <input type='number' className='input' onChange={e=>this.handleSavings(e)}></input>
           <br/>
-          <select
-                type="text"
-                name="month"
-                id="month"
-                value={this.state.month}
-                onChange={e => this.handleEntry(e)}
-                required
-              >
-                <option value={null}>Months</option>
-                {options}
-              </select>
-              <br/><br/>
+          <label htmlFor='Savings'><FontAwesomeIcon icon={faMoneyBillAlt }/>{' '}Other Assets $: {' '}</label>
+          <input type='number' className='input' onChange={e=>this.handleOtherAssets(e)}></input>
+          <br/>
+          <label htmlFor='Savings'><FontAwesomeIcon icon={faMoneyCheck }/>{' '}Other Debt $: {' '}</label>
+          <input type='number' className='input' onChange={e=>this.handleOtherDebt(e)}></input>
+          <br/><br/>
+
           <button type="submit" className='submitButton' onClick={e=>this.handleSubmit(e)}>Submit</button>
           <br/><br/>
           
           <br/>
-          <p>Total Net Worth: 
+          {this.state.networth
+          ?(<p>Total Net Worth: 
             {this.state.total>=0
             ?(`$${this.state.total}`)
             : `-$${-1*this.state.total}`}
-            </p>
+            </p>)
+          : null}
+
         </form>
 
 
       </div>
-      {(this.state.resources===true 
-      ?(<ul className="list" id='debtList'><h2>Financial Planning Resources:</h2>
-        <li>www.mint.com</li>
-        <li>www.sofi.com</li>
-      </ul>)
-      : null
-    )}
-      {(this.state.resources===false 
-      ?(<ul className="list" id='debtList'><h2>Financial Planning Resources:</h2>
-              <li>www.vanguard.com</li>
-              <li>www.blackrock.com</li>
-            </ul>)
-      : null
-    )}
+    <Resources resources={this.state.resources}/>
+    <Overtime entries={this.state.entries}/>
     <Goals/>
-
-    {/* <ul className="list">Networth Over Time:
-    {entries.map(entry => {
-       return( <li key={entry.month}>
-          {entry.month}: {this.state.total>=0
-            ?(`$${this.state.total}`)
-            : `-$${-1*this.state.total}`}
-        </li>)
-     })}
-    </ul> */}
-
     </div>
   );
 }
