@@ -7,9 +7,19 @@ export default class Goals extends Component{
         this.state={
             goals: [],
             formEntry:'',
-            error: ""
+            error: "",
+            id: 0
         }
     }
+
+    handleDeleteGoal=(e)=>{
+        e.preventDefault();
+        let id= e.target.id
+        this.setState({
+          goals: this.state.goals.filter(goal => goal.id !== parseInt(id) )
+        })
+      }
+
     handleGoal=e=>{
         e.preventDefault();
         this.setState({formEntry:e.target.value})
@@ -18,13 +28,15 @@ export default class Goals extends Component{
         e.preventDefault();
         if(this.state.goals.length<=2){    
         this.setState({goals: [...this.state.goals,
-                this.state.formEntry]})
+                {id: this.state.id + 1, goal: this.state.formEntry}],
+            id: this.state.id+1})
         }
         else this.setState({error: "Limit to 3 goals"})
         
     }
   render(){
       let goals=this.state.goals
+      
   return (
         <div className='Goals'>
         <h1>Goals</h1>
@@ -49,16 +61,16 @@ export default class Goals extends Component{
         <button className='submitButton' type='submit'>
         Add Goal
         </button>
-        <error>
+        <div>
         {this.state.goals.length<=2
         ? null
         :<p>{this.state.error}</p>}
-        </error>
+        </div>
         </form>
         <ul className='goalsList'>Goals
 
         {goals.map(goal=>(
-            <li>{goal}</li>
+            <li key={goal.id}>{goal.goal} <button id={goal.id} onClick={this.handleDeleteGoal}>Delete</button></li>
             ))
         
         }

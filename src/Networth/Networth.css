@@ -51,3 +51,6 @@ font-size: 16px;
 .lineChartSvg{
     border: black solid 5px
 }
+.LineChart{
+    background: gray
+}

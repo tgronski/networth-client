@@ -6,6 +6,9 @@ import { faCreditCard, faLandmark, faHandHoldingUsd, faPiggyBank, faMoneyBillAlt
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Overtime from "./Overtime"
 import Resources from './Resources'
+import ApiContext from './ApiContext'
+import LineChart from './LineChart';
+
 
 export default class Networth extends Component {
   constructor(props){
@@ -22,9 +25,18 @@ export default class Networth extends Component {
         total: 0,
         entries: [],
         resources: null,
-        networth: false
+        networth: false, 
+        error: '',
+        id:0
     }
   }
+  static contextType = ApiContext 
+  handleDeleteEntry=(id)=>{
+    this.setState({
+      entries: this.state.entries.filter(entry => entry.id !== parseInt(id) )
+    })
+  }
+
   handleCredit=(e)=>{
     e.preventDefault();
     let value=(e.target.value).replace('-','')
@@ -80,6 +92,7 @@ export default class Networth extends Component {
     this.setState({networth: false,otherDebt: value})
   }
 
+
   handleSubmit(e){
     e.preventDefault();
     let credit=parseInt(this.state.credit)
@@ -95,16 +108,23 @@ export default class Networth extends Component {
     }
     else resources = false
     let total=investments  - credit  + savings - loans - otherDebt + otherAssets
-    this.setState({total: total,
-    entries: [ ...this.state.entries,
-      {time: now , total: total}],
-    resources: resources, networth: true})
-    console.log(this.state)
-  }
 
+    if(this.state.entries.length===12){
+      this.setState({error: "The maximum historical networth is 12. Please delete some of your past entries.", 
+      total: ''})
+    }
+    else this.setState({total: total,
+    entries: [ ...this.state.entries,
+      {id: this.state.id+1, time: now , total: total}],
+    resources: resources, networth: true, id: this.state.id+1})
+  }
   render(){
   
   return (
+    <ApiContext.Provider value={{
+      entries: this.state.entries, 
+      handleDeleteEntry: this.handleDeleteEntry
+    }}>
     <div className="Networth">
       <h1>Your personalized financial planning dashboard:</h1>
       <div className='profile'>
@@ -149,15 +169,18 @@ export default class Networth extends Component {
             : `-$${-1*this.state.total}`}
             </p>)
           : null}
+          <p>{this.state.error}</p>
 
         </form>
 
 
       </div>
     <Resources resources={this.state.resources}/>
-    <Overtime entries={this.state.entries}/>
+    <Overtime entries={this.context.entries}/>
+    {/* <LineChart data={this.state.entries}/> */}
     <Goals/>
     </div>
+    </ApiContext.Provider>
   );
 }
 }
