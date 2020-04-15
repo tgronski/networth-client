@@ -17,7 +17,9 @@ export default class Calculator extends Component {
 
   }
   render(){
-    const total=(this.state.assets-this.state.debts).toFixed(2)
+    let total=(this.state.assets-this.state.debts).toFixed(2)
+    let options = { style: 'currency', currency: 'USD' };
+    let numberFormat = new Intl.NumberFormat('en-US', options);
   return (
     <div className="Calculator">
       
@@ -30,7 +32,7 @@ export default class Calculator extends Component {
             <label htmlFor="debts"> Debts $</label>
             <input type="number" id="debts-total" name="debts" placeholder='0.00' value={this.state.debts} onChange={e => this.validateEntry(e)} required/>
           </div>
-        <p>Your net worth is ${total}</p>
+        <p>Your net worth is {numberFormat.format(total)}</p>
         </form>
 
     </div>

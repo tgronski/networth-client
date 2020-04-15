@@ -95,31 +95,34 @@ export default class Networth extends Component {
 
   handleSubmit(e){
     e.preventDefault();
-    let credit=parseInt(this.state.credit)
-    let investments=parseInt(this.state.investments)
-    let savings = parseInt(this.state.savings)
-    let loans = parseInt(this.state.loans)
-    let otherDebt = parseInt(this.state.otherDebt)
-    let otherAssets = parseInt(this.state.otherAssets)
+    let options = { style: 'currency', currency: 'USD' };
+    let numberFormat = new Intl.NumberFormat('en-US', options);
+    let credit=parseFloat(this.state.credit)
+    let investments=parseFloat(this.state.investments)
+    let savings = parseFloat(this.state.savings)
+    let loans = parseFloat(this.state.loans)
+    let otherDebt = parseFloat(this.state.otherDebt)
+    let otherAssets = parseFloat(this.state.otherAssets)
     let resources = this.state.resources
     let now= new Date().toDateString()
     if(credit>0 || loans >0){
       resources = true
     }
     else resources = false
-    let total=investments  - credit  + savings - loans - otherDebt + otherAssets
 
+    let total=investments  - credit  + savings - loans - otherDebt + otherAssets
+    total=numberFormat.format(total)
+    
     if(this.state.entries.length===12){
       this.setState({error: "The maximum historical networth is 12. Please delete some of your past entries.", 
       total: ''})
     }
-    else this.setState({total: total,
-    entries: [ ...this.state.entries,
-      {id: this.state.id+1, time: now , total: total}],
+    else this.setState({entries: [ ...this.state.entries,
+      {id: this.state.id+1, time: now , total: total}],total: total,
     resources: resources, networth: true, id: this.state.id+1})
   }
   render(){
-  
+
   return (
     <ApiContext.Provider value={{
       entries: this.state.entries, 
@@ -136,7 +139,7 @@ export default class Networth extends Component {
           </label>
         <br/>
 
-          <NetworthPie credit={this.state.credit} loans={this.state.loans} savings={this.state.savings} investments={this.state.investments}/>
+          <NetworthPie credit={this.state.credit} loans={this.state.loans} savings={this.state.savings} investments={this.state.investments} otherAssets={this.state.otherAssets} otherDebt={this.state.otherDebt}/>
       
           <br/> <br/>
           <label htmlFor='Credit-Card'><FontAwesomeIcon icon={faCreditCard}/>{' '}Credit Card Bill $: {' '}</label>
@@ -162,13 +165,7 @@ export default class Networth extends Component {
           <br/><br/>
           
           <br/>
-          {this.state.networth
-          ?(<p>Total Net Worth: 
-            {this.state.total>=0
-            ?(`$${this.state.total}`)
-            : `-$${-1*this.state.total}`}
-            </p>)
-          : null}
+          <p>Total Net Worth: {this.state.total}</p>
           <p>{this.state.error}</p>
 
         </form>

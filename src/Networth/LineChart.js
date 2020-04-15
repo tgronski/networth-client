@@ -1,66 +1,37 @@
 import React,{Component} from 'react';
 import * as d3 from "d3";
+import ApiContext from './ApiContext'
+
 
 
 export default class LineChart extends Component{  
- 
+    static contextType = ApiContext 
+
   render(){
     
     const width = 500, height = 350, margin = 20
-    const data= this.props.data
-    
-    const h = height - 2 * margin, w = width - 2 * margin
+    let w= width-(margin*2)
+    let h = height-(margin*2)
+    let data=this.context.entries
+    let x = d3.scaleTime().rangeRound([0, width]);
+    let y = d3.scaleLinear().rangeRound([height, 0]);
+    let line = d3.line()   
+    .x(function(d) { return x(d.time)})   
+    .y(function(d) { return y(d.value)})   
+    x.domain(d3.extent(data, function(d) { return d.time }));   
+    y.domain(d3.extent(data, function(d) { return d.value }));
 
-    //number formatter
-    const xFormat = d3.format('.2')
-    
-    //x scale
-    const x = d3.scaleLinear()
-      .domain(d3.extent(data, d => d.id)) //domain: [min,max] of a
-      .range([margin, w])
-    
-    //y scale
-    const y = d3.scaleLinear()
-      .domain([0, d3.max(data, d => d.total)]) // domain [0,max] of b (start from 0)
-      .range([h, margin])
-    
-    //line generator: each point is [x(d.a), y(d.b)] where d is a row in data
-    // and x, y are scales (e.g. x(10) returns pixel value of 10 scaled by x)
-    const line = d3.line()
-      .x(d => x(d.id))
-      .y(d => y(d.total))
-      .curve(d3.curveCatmullRom.alpha(0.5)) //curve line
-     
-    const xTicks = x.ticks(6).map(d => (
-        x(d) > margin && x(d) < w ? 
-          <g transform={`translate(${x(d)},${h + margin})`}>  
-            <text>{xFormat(d)}</text>
-            <line x1='0' x1='0' y1='0' y2='5' transform="translate(0,-20)"/>
-          </g>
-        : null
-    ))
+    // g.append("g")   .attr("transform", "translate(0," + height + ")")   .call(d3.axisBottom(x))   .select(".domain")   .remove();
+    // g.append("g")   .call(d3.axisLeft(y))   .append("text")   .attr("fill", "#000")   .attr("transform", "rotate(-90)")   .attr("y", 6)   .attr("dy", "0.71em")   .attr("text-anchor", "end")   .text("Price ($)");
+    // g.append("path").datum(data).attr("fill", "none").attr("stroke", "steelblue").attr("stroke-linejoin", "round").attr("stroke-linecap", "round").attr("stroke-width", 1.5).attr("d", line);
 
-    const yTicks = y.ticks(5).map(d => (
-        y(d) > 10 && y(d) < h ? 
-          <g transform={`translate(${margin},${y(d)})`}>  
-            <text x="-12" y="5">{xFormat(d)}</text>
-            <line x1='0' x1='5' y1='0' y2='0' transform="translate(-5,0)"/>
-            <line className='gridline' x1='0' x1={w - margin} y1='0' y2='0' transform="translate(-5,0)"/> 
-          </g>
-        : null
-    ))
+
+    
   return (
     <div className="LineChart">
        <svg width={width} height={height}>
-         <line className="axis" x1={margin} x2={w} y1={h} y2={h}/>
-         <line className="axis" x1={margin} x2={margin} y1={margin} y2={h}/>
-         <path d={line(data)}/>
-         <g className="axis-labels">
-           {xTicks}
-         </g>
-         <g className="axis-labels">
-           {yTicks}
-         </g>
+
+      
       </svg>
     </div>
   )

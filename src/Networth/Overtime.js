@@ -14,12 +14,12 @@ export default class Overtime extends Component{
   render(){
     let entries= this.context.entries
     for(let i=0; i<entries.length; i++){
-      if(entries[i].total<1){
+      if(entries[i].total.includes('-')){
         entries[i].color="red"
       }
       else entries[i].color="green"
     }
-    
+
   return (
     <div className="Overtime">
     {entries.length>0
@@ -28,9 +28,9 @@ export default class Overtime extends Component{
     }
     {entries.length>0
     ?(entries.map(entry=>{
-     return <p style={{color: `${entry.color}`}} key={entry.id}>{entry.time}: {' '}{entry.total>=0
-        ?(`$${entry.total}`)
-        : `-$${-1*entry.total}`}<button id={entry.id} onClick={this.handleClickDelete}>Delete</button></p>
+     return <p style={{color: `${entry.color}`}} key={entry.id}>{entry.time}: {' '}{entry.total}
+     
+     <button id={entry.id} onClick={this.handleClickDelete}>Delete</button></p>
     }))
     : null
     }

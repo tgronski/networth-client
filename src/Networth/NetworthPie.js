@@ -7,8 +7,8 @@ export default class NetworthPie extends Component {
 
 
   render(){
-    let debts=parseInt(this.props.credit) + parseInt(this.props.loans)
-    let assets=parseInt(this.props.investments) + parseInt(this.props.savings)
+    let debts=parseInt(this.props.credit) + parseInt(this.props.loans)+ parseInt(this.props.otherDebt) 
+    let assets=parseInt(this.props.investments) + parseInt(this.props.savings) +parseInt(this.props.otherAssets)
     let total=assets+debts
     let debtPercentage=(debts/total)*100
     let assetPercentage=(assets/total)*100

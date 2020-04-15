@@ -19,6 +19,8 @@ export default class Preview extends Component{
         let colors=d3.interpolateRgb("#152950","#738683");
 
 
+
+
   return (
     <div className="Preview">
         <section className='Preview-total'>
