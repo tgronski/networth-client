@@ -7,15 +7,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Overtime from "./Overtime"
 import Resources from './Resources'
 import ApiContext from './ApiContext'
-import LineChart from './LineChart';
 
 
 export default class Networth extends Component {
   constructor(props){
     super(props);
     this.state={
-        categories: [{id: 1, name: "Credit Card",type: "Debt"},{id: 2, name: "Investments (Stocks/Bonds)", type: 'Asset'},
-                    {id: 3, name: "Student Loans",type: 'Debt'},{id: 4, name: "Savings",type: "Asset"}],
+        // categories: [{id: 1, name: "Credit Card",type: "Debt"},{id: 2, name: "Investments (Stocks/Bonds)", type: 'Asset'},
+        //             {id: 3, name: "Student Loans",type: 'Debt'},{id: 4, name: "Savings",type: "Asset"}],
         credit: 0,
         investments: 0,
         loans: 0,
@@ -126,7 +125,8 @@ export default class Networth extends Component {
   return (
     <ApiContext.Provider value={{
       entries: this.state.entries, 
-      handleDeleteEntry: this.handleDeleteEntry
+      handleDeleteEntry: this.handleDeleteEntry,
+
     }}>
     <div className="Networth">
       <h1>Your personalized financial planning dashboard:</h1>

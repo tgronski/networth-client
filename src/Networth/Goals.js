@@ -3,7 +3,6 @@ import './Goals.css'
 import * as d3 from "d3";
 
 import ApiContext from './ApiContext'
-import { sum } from 'd3';
 
 
 export default class Goals extends Component{    
@@ -15,7 +14,6 @@ export default class Goals extends Component{
             goal_valueEntry:'',
             error: "",
             id: 0, 
-            data:[],
         }
     }
     static contextType = ApiContext 
@@ -42,7 +40,7 @@ export default class Goals extends Component{
         let recentValue= this.context.entries[number-1]
         if (recentValue!=null){
           networth =(recentValue.total)
-          networth= Number(networth.replace(/[^-]+/g,""))
+          networth= Number(networth.replace(/[^0-9.-]+/g,""))
   
         }
         if(this.state.goals.length<=2){    
@@ -65,20 +63,22 @@ export default class Goals extends Component{
         networth= Number(networth.replace(/[^0-9.-]+/g,""))
 
         }
+    console.log(networth)
     let sumGoals = 0 
     for(let i=0; i<this.state.goals.length; i++){
-        console.log(this.state.goals[i].goalvalue)
             sumGoals = parseFloat(this.state.goals[i].goalvalue)+sumGoals
     }
+    console.log(sumGoals)
     let data= [0]
     if(sumGoals>0 && networth<sumGoals){
         data = [networth/parseFloat(sumGoals)*100,100-(networth/parseFloat(sumGoals)*100)]
     }
+
     else if (sumGoals>0 && networth>sumGoals){
         data= [100,0]
     }
     else data= [0,100]
-
+    console.log(data)
         const height=200;
         const width=200;
         let pie=d3.pie()(data)
@@ -108,6 +108,8 @@ export default class Goals extends Component{
         id='GoalsForm__goal_title'>
         
         </input>
+        <br/>       <br/>
+
         <label htmlFor='GoalsForm__goal_title'>
         Goal Value: {' '}$
         </label>
@@ -118,7 +120,9 @@ export default class Goals extends Component{
         id='GoalsForm__goal_value'>
         </input>
         </div>
-       {" "}
+        <br/>
+
+       <br/>
         <button className='submitButton' type='submit'>
         Add Goal
         </button>
@@ -131,8 +135,13 @@ export default class Goals extends Component{
         <ul className='goalsList'>Goals
 
         {goals.map(goal=>(
+            
             <li key={goal.id}>{goal.goalname}:{' '}{numberFormat.format(goal.goalvalue)} 
-            <br/>Percent to Goal: {' '}{((networth/parseFloat(goal.goalvalue))*100).toFixed()}%
+            
+            <br/>Percent to Goal: {' '}
+            {networth<goal.goalvalue
+            ?(`${((networth/parseFloat(goal.goalvalue))*100).toFixed()}%`)
+            : "100%"}
             <button id={goal.id} onClick={this.handleDeleteGoal}>Delete</button></li>
             ))
         
@@ -150,12 +159,12 @@ export default class Goals extends Component{
                     <g transform={`translate(${width/2},${height/2})`}>
                         {pie.map((slice, index)=>{
                             let sliceColor= colors(index/(pie.length-1));
-
-                            return<> <path key={slice.index} d={arc(slice)} fill={sliceColor} />
+                            return < g key={slice.data}>
+                            <path key={slice.index} d={arc(slice)} fill={sliceColor} />
                             <text textAnchor='middle' x="0" y="0" fill='black'>
                                {data[0].toFixed()}% 
                             </text>
-                            </>
+                            </g>
                         })}
 
                     </g>

@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 
 
-export default class Overtime extends Component{  
+export default class Resources extends Component{  
 
   render(){
     let resources=this.props.resources
@@ -23,9 +23,8 @@ export default class Overtime extends Component{
       : null
     )}
 
-    // How do i change this to be something that keeps the user on my website 
 
-    
+
 
     </>
   )
