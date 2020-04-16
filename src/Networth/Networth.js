@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Overtime from "./Overtime"
 import Resources from './Resources'
 import ApiContext from './ApiContext'
-
+import LineChart from './LineChart'
 
 export default class Networth extends Component {
   constructor(props){
@@ -117,7 +117,7 @@ export default class Networth extends Component {
       total: ''})
     }
     else this.setState({entries: [ ...this.state.entries,
-      {id: this.state.id+1, time: now , total: total}],total: total,
+      {id: this.state.id+1, time: now , total: total, value: Number(total.replace(/[^0-9.-]+/g,""))}],total: total,
     resources: resources, networth: true, id: this.state.id+1})
   }
   render(){
@@ -174,7 +174,7 @@ export default class Networth extends Component {
       </div>
     <Resources resources={this.state.resources}/>
     <Overtime entries={this.context.entries}/>
-    {/* <LineChart data={this.state.entries}/> */}
+    <LineChart data={this.state.entries}/>
     <Goals/>
     </div>
     </ApiContext.Provider>

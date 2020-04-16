@@ -60,3 +60,19 @@ font-size: 16px;
   .linechart_axis {
     stroke: #bdc3c7; 
   }
+
+.axis{
+   
+        fill: none;
+        stroke: steelblue;
+        stroke-width: 1.5px;
+        /* shape-rendering: crispEdges; */
+    
+}
+
+
+.path {
+    fill:none;
+    stroke: steelblue;
+    stroke-width: 1.5px;
+}
