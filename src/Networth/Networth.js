@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './Networth.css'
 import NetworthPie from './NetworthPie';
-import Goals from './Goals'
+import GoalsForm from './Goals/GoalsForm'
 import { faCreditCard, faLandmark, faHandHoldingUsd, faPiggyBank, faMoneyBillAlt, faMoneyCheck} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Overtime from "./Overtime"
@@ -175,7 +175,7 @@ export default class Networth extends Component {
     <Resources resources={this.state.resources}/>
     <Overtime entries={this.context.entries}/>
     <LineChart data={this.state.entries}/>
-    <Goals/>
+    <GoalsForm/>
     </div>
     </ApiContext.Provider>
   );
