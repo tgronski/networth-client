@@ -38,7 +38,7 @@ export default class Networth extends Component {
 
   handleCredit=(e)=>{
     e.preventDefault();
-    let value=(e.target.value).replace('-','')
+    let value=(e.target.value).replace(/[^0-9.-]+/g,'')
     if(value===''){
       value=0
     }
@@ -47,7 +47,7 @@ export default class Networth extends Component {
   }
   handleInvestments=(e)=>{
     e.preventDefault();
-    let value=e.target.value.replace('-','')
+    let value=e.target.value.replace(/[^0-9.-]+/g,'')
     if(value===''){
       value=0
     }
@@ -56,7 +56,7 @@ export default class Networth extends Component {
   }
   handleSavings=(e)=>{
     e.preventDefault();
-    let value=e.target.value.replace('-','')
+    let value=e.target.value.replace(/[^0-9.-]+/g,'')
     if(value===''){
       value=0
     }
@@ -65,7 +65,7 @@ export default class Networth extends Component {
   }
   handleLoans=(e)=>{
     e.preventDefault();
-    let value=e.target.value.replace('-e','')
+    let value=e.target.value.replace(/[^0-9.-]+/g,'')
     if(value===''){
       value=0
     }
@@ -74,7 +74,7 @@ export default class Networth extends Component {
   }  
   handleOtherAssets=(e)=>{
     e.preventDefault();
-    let value=e.target.value.replace('-e','')
+    let value=e.target.value.replace(/[^0-9.-]+/g,'')
     if(value===''){
       value=0
     }
@@ -83,7 +83,7 @@ export default class Networth extends Component {
   }
   handleOtherDebt=(e)=>{
     e.preventDefault();
-    let value=e.target.value.replace('-e','')
+    let value=e.target.value.replace(/[^0-9.-]+/g,'')
     if(value===''){
       value=0
     }
@@ -132,7 +132,8 @@ export default class Networth extends Component {
       <h1>Your personalized financial planning dashboard:</h1>
       <div className='profile'>
     
-        <form>
+        <form className="WalletEntries">
+        <div className="WalletTitle">
         <label htmlFor='Networth-wallet'>
           <br/>
           Wallet:
@@ -140,7 +141,7 @@ export default class Networth extends Component {
         <br/>
 
           <NetworthPie credit={this.state.credit} loans={this.state.loans} savings={this.state.savings} investments={this.state.investments} otherAssets={this.state.otherAssets} otherDebt={this.state.otherDebt}/>
-      
+          </div>
           <br/> <br/>
           <label htmlFor='Credit-Card'><FontAwesomeIcon icon={faCreditCard}/>{' '}Credit Card Bill $: {' '}</label>
           <input type='number' className='input'  onChange={e=>this.handleCredit(e)}></input>
@@ -160,14 +161,14 @@ export default class Networth extends Component {
           <label htmlFor='Savings'><FontAwesomeIcon icon={faMoneyCheck }/>{' '}Other Debt $: {' '}</label>
           <input type='number' className='input' onChange={e=>this.handleOtherDebt(e)}></input>
           <br/><br/>
-
+          <div className="WalletTitle">
           <button type="submit" className='submitButton' onClick={e=>this.handleSubmit(e)}>Submit</button>
-          <br/><br/>
+          <br/>
           
           <br/>
           <p>Total Net Worth: {this.state.total}</p>
           <p>{this.state.error}</p>
-
+          </div>
         </form>
 
 

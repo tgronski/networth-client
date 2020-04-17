@@ -4,5 +4,5 @@ export default React.createContext({
   entries: [],
   handleDeleteEntry:()=>{},
   goals: [], 
-  handleDeleteGoals: ()=>{},
+  handleDeleteGoal: ()=>{},
 })

@@ -6,7 +6,39 @@
     margin-left: auto;
     margin-right: auto;
 }
-
+.Key{
+    height: 10px;
+    max-width: 150px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0;
+}
+.KeyMenu{
+    font-size: 18px;
+}
+.Key>li{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    margin: 0;
+}
+.Asset{
+    background-color: #738683;
+    width: 17px;
+    height: 17px;
+    margin:0
+ }
+ .Debt{
+    background-color: #152950;
+    width: 17px;
+    height: 17px;
+    margin:0
+ }
 .profile{
     display: flex;
     margin-top: 6%;
@@ -75,4 +107,15 @@ font-size: 16px;
     fill:none;
     stroke: steelblue;
     stroke-width: 1.5px;
+}
+.Resources{
+    width: 90%;
+    margin-left: auto; 
+    margin-right: auto
+}
+.WalletEntries{
+    text-align: left;
+}
+.WalletTitle{
+    text-align: center;
 }

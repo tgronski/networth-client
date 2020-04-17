@@ -7,7 +7,7 @@ export default class Resources extends Component{
     let resources=this.props.resources
 
   return (
-    <>
+    <div className="Resources">
       {(resources===true 
       ?(<ul className="list" id='debtList'><h2>Financial Planning Resources:</h2>
         <li>www.mint.com</li>
@@ -26,7 +26,7 @@ export default class Resources extends Component{
 
 
 
-    </>
+    </div>
   )
 }
 }

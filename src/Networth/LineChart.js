@@ -15,7 +15,7 @@ export default class LineChart extends Component{
         width: 400,
         height: 500,
         margin: 100,
-        w:"90%"
+        w:"70%"
       }
 
     

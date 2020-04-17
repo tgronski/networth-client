@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './Networth.css'
 import * as d3 from "d3";
+import Key from './Key'
 
 export default class NetworthPie extends Component {
 
@@ -24,7 +25,7 @@ export default class NetworthPie extends Component {
     <>
     {total===0
         ?(<><br/><i>Add values below to see a breakdown</i></>)
-    :( <svg className='report'>
+    :(<div> <svg className='report'>
             <g transform={`translate(${width/2},${height/2})`}>
                 {pie.map((slice, index)=>{
                     let sliceColor= colors(index/(pie.length-1));
@@ -37,7 +38,9 @@ export default class NetworthPie extends Component {
                         
                 </text>
             </g>
-        </svg>)
+        </svg>
+        <Key/>
+        </div>)
     }
     </>
   );
