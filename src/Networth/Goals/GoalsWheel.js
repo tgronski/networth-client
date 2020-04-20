@@ -36,8 +36,9 @@ export default class GoalsWheel extends Component{
       let pie=d3.pie()(data)
       let arc=d3.arc()
       .innerRadius(70)
-      .outerRadius(100);
-      let colors=d3.interpolateRgb("#738683","#152950");
+      .outerRadius(100)
+      
+      let colors=d3.interpolateRgb("#738683","#D3D3D3");
   
   return (
 
@@ -45,13 +46,13 @@ export default class GoalsWheel extends Component{
     <h3>Percent to All Goals:</h3>
     <svg className='report'>
     
-                <g transform={`translate(${width/2},${height/2})`}>
+                <g  transform={`translate(${width/2},${height/2})`}>
                     {pie.map((slice, index)=>{
                         let sliceColor= colors(index/(pie.length-1));
-                        return < g key={slice.data}>
-                        <path key={slice.index} d={arc(slice)} fill={sliceColor} />
+                        return < g  key={slice.data}>
+                        <path  key={slice.index} d={arc(slice)} fill={sliceColor} />
                         <text textAnchor='middle' x="0" y="0" fill='black'>
-                           {data[0].toFixed()}% 
+                           {data[0].toFixed(2)}% 
                         </text>
                         </g>
                     })}

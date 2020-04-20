@@ -131,18 +131,17 @@ export default class Networth extends Component {
     <div className="Networth">
       <h1>Your personalized financial planning dashboard:</h1>
       <div className='profile'>
-    
-        <form className="WalletEntries">
-        <div className="WalletTitle">
-        <label htmlFor='Networth-wallet'>
-          <br/>
-          Wallet:
-          </label>
+        <div className="wallet">
+        <h2>Wallet: </h2>
+        </div>
         <br/>
-
+        <div className="test">
+        <div className="WalletTitle">
           <NetworthPie credit={this.state.credit} loans={this.state.loans} savings={this.state.savings} investments={this.state.investments} otherAssets={this.state.otherAssets} otherDebt={this.state.otherDebt}/>
           </div>
+          <form className="WalletEntries">
           <br/> <br/>
+          <div className="WalletForm">
           <label htmlFor='Credit-Card'><FontAwesomeIcon icon={faCreditCard}/>{' '}Credit Card Bill $: {' '}</label>
           <input type='number' className='input'  onChange={e=>this.handleCredit(e)}></input>
           <br/>
@@ -169,13 +168,16 @@ export default class Networth extends Component {
           <p>Total Net Worth: {this.state.total}</p>
           <p>{this.state.error}</p>
           </div>
+          </div>
         </form>
 
-
+        </div>
       </div>
     <Resources resources={this.state.resources}/>
+    <div className="chart">
     <Overtime entries={this.context.entries}/>
-    <LineChart data={this.state.entries}/>
+    {/* <LineChart data={this.state.entries}/> */}
+    </div>
     <GoalsForm/>
     </div>
     </ApiContext.Provider>

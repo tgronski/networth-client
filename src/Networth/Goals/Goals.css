@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    align-content: space-around;
+    align-items: space-around;
     margin: 0 5% 0 5%;
 }
 
@@ -12,6 +12,17 @@
 .goalsListItem{
     list-style-type: none;
     text-align: left;
+    
+}
+.goalsList,.GoalsForm,.wheel{
+    display: flex;
+    flex-direction: column;
+    margin-right: auto;  
+    margin-left: auto  
+
+}
+.wheelImg{
+    border: black solid 2px;
 }
 
 .wheel{

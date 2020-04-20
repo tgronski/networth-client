@@ -27,6 +27,10 @@
     flex-direction: row;
     margin: 0;
 }
+.dot {
+    fill: #738683;
+    stroke: #fff;
+}
 .Asset{
     background-color: #738683;
     width: 17px;
@@ -39,17 +43,28 @@
     height: 17px;
     margin:0
  }
-.profile{
+
+ .test{
     display: flex;
-    margin-top: 6%;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+    max-height: 500px;
+  
+ }
+ .wallet>h2{
+     margin-bottom: 0;
+ }
+.profile{
+    
     margin-left: auto;
     margin-right: auto;
     width: 80%;
     border: solid black 3px;
     font-size: 22px;
     text-decoration: center;
+
+    
 }
 
 .List{
@@ -63,9 +78,9 @@
     height: 100vh;
 }
 .report{
-height: 225px;
-max-width: 200px;
-font-size: 16px;
+    height: 225px;
+    max-width: 200px;
+    font-size: 16px;
 }
 .list{
     display: flex; 
@@ -118,4 +133,23 @@ font-size: 16px;
 }
 .WalletTitle{
     text-align: center;
+}
+
+@media only screen and (min-width: 900px) {
+    .chart{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;   
+ }
+    .test{
+        padding: 1%;
+        flex-direction: row;
+        margin-left: 10%;
+    }
+    .WalletEntries{
+    display: flex;
+  
+    margin: 10%
+    }
+
 }

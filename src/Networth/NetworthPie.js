@@ -24,7 +24,7 @@ export default class NetworthPie extends Component {
     return (
     <>
     {total===0
-        ?(<><br/><i>Add values below to see a breakdown</i></>)
+        ?(<div className='report'><br/><i>Add values below to see a breakdown</i></div>)
     :(<div> <svg className='report'>
             <g transform={`translate(${width/2},${height/2})`}>
                 {pie.map((slice, index)=>{
@@ -38,6 +38,7 @@ export default class NetworthPie extends Component {
                         
                 </text>
             </g>
+           
         </svg>
         <Key/>
         </div>)
