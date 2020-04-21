@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './Networth.css'
 import NetworthPie from './NetworthPie';
 import GoalsForm from './Goals/GoalsForm'
-import { faCreditCard, faLandmark, faHandHoldingUsd, faPiggyBank, faMoneyBillAlt, faMoneyCheck} from '@fortawesome/free-solid-svg-icons'
+import { faCreditCard, faLandmark, faHandHoldingUsd, faPiggyBank, faMoneyBillAlt, faMoneyCheck, faQuestionCircle} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Overtime from "./Overtime"
 import Resources from './Resources'
@@ -26,7 +26,8 @@ export default class Networth extends Component {
         resources: null,
         networth: false, 
         error: '',
-        id:0
+        id:0,
+        showDescription:false
     }
   }
   static contextType = ApiContext 
@@ -91,6 +92,18 @@ export default class Networth extends Component {
     this.setState({networth: false,otherDebt: value})
   }
 
+  handleOtherDescription=(e)=>{
+    e.preventDefault();
+    if(this.state.showDescription===false){
+      this.setState({showDescription: true})
+      }
+      else this.setState({showDescription: false})
+  
+  }  
+  handleOtherDescriptionDrop=(e)=>{
+    e.preventDefault();
+     this.setState({showDescription: false})
+  }
 
   handleSubmit(e){
     e.preventDefault();
@@ -154,12 +167,17 @@ export default class Networth extends Component {
           <label htmlFor='Savings'><FontAwesomeIcon icon={faPiggyBank }/>{' '}Savings $: {' '}</label>
           <input type='number' className='input' onChange={e=>this.handleSavings(e)}></input>
           <br/>
-          <label htmlFor='Savings'><FontAwesomeIcon icon={faMoneyBillAlt }/>{' '}Other Assets $: {' '}</label>
-          <input type='number' className='input' onChange={e=>this.handleOtherAssets(e)}></input>
+          <label htmlFor='Savings'><FontAwesomeIcon icon={faMoneyBillAlt }/><FontAwesomeIcon icon={faQuestionCircle} className="help" onMouseEnter={e=>this.handleOtherDescription(e)} onMouseLeave={e=>this.handleOtherDescriptionDrop(e)}/>{' '}Other Assets $: {' '}</label>
+          <input type='number' className='input'  onChange={e=>this.handleOtherAssets(e)}></input>
           <br/>
-          <label htmlFor='Savings'><FontAwesomeIcon icon={faMoneyCheck }/>{' '}Other Debt $: {' '}</label>
-          <input type='number' className='input' onChange={e=>this.handleOtherDebt(e)}></input>
+          <label htmlFor='Savings'><FontAwesomeIcon  icon={faMoneyCheck }/><FontAwesomeIcon icon={faQuestionCircle} className="help" onMouseEnter={e=>this.handleOtherDescription(e)} onMouseLeave={e=>this.handleOtherDescriptionDrop(e)}/>{' '}Other Debt $: {' '}</label>
+          <input type='number' className='input'   onChange={e=>this.handleOtherDebt(e)}></input>
           <br/><br/>
+          {this.state.showDescription
+            ?( <div id='description'>Assets indicate that they earn value over time, while debts lose value OR need to be paid back over time.</div>)
+            :(null
+            )
+          }
           <div className="WalletTitle">
           <button type="submit" className='submitButton' onClick={e=>this.handleSubmit(e)}>Submit</button>
           <br/>
@@ -173,6 +191,8 @@ export default class Networth extends Component {
 
         </div>
       </div>
+
+
     <Resources resources={this.state.resources}/>
     <div className="chart">
     <Overtime entries={this.context.entries}/>

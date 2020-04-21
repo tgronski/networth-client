@@ -97,8 +97,20 @@
 .lineChartSvg{
     border: black solid 5px
 }
-
-
+#description{
+    height: 20px;
+    z-index: 1;
+    margin-top:-20px;
+    position: absolute;
+    color: red;
+    padding: 2px;
+    font-size: 10px;
+}
+.help{
+    font-size: 11px;
+    margin-left: 2px;
+    margin-bottom:6px;
+}
 .linechart_path {
     stroke-width: 3; 
     fill: none;      
