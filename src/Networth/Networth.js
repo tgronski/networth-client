@@ -8,13 +8,15 @@ import Overtime from "./Overtime"
 import Resources from './Resources'
 import ApiContext from './ApiContext'
 import LineChart from './LineChart'
+import config from "../config";
+import CalculationApiService from "../services/calculations-service"
+import TokenService from '../services/token-service'
+import WalletsApiService from '../services/wallet-service'
 
 export default class Networth extends Component {
   constructor(props){
     super(props);
     this.state={
-        // categories: [{id: 1, name: "Credit Card",type: "Debt"},{id: 2, name: "Investments (Stocks/Bonds)", type: 'Asset'},
-        //             {id: 3, name: "Student Loans",type: 'Debt'},{id: 4, name: "Savings",type: "Asset"}],
         credit: 0,
         investments: 0,
         loans: 0,
@@ -27,10 +29,48 @@ export default class Networth extends Component {
         networth: false, 
         error: '',
         id:0,
-        showDescription:false
+        showDescription:false,
+        advice:[],
+        calculations:[],
+        wallet:[]
     }
   }
   static contextType = ApiContext 
+
+  componentDidMount() {
+    Promise.all([
+      CalculationApiService.getCalculations(),
+      fetch(`${config.API_ENDPOINT}/api/advice`),
+      WalletsApiService.getWallets()
+      
+      ])
+
+      .then(([adviceRes, calculationsRes]) => {
+
+        if (!adviceRes.ok) 
+          return adviceRes.json().then(e => Promise.reject(e));
+        if (!calculationsRes.ok)
+          return calculationsRes.json().then(e => Promise.reject(e));
+        // if (!walletRes.ok)
+        //   return walletRes.json().then(e => Promise.reject(e));
+
+        return Promise.all([
+          adviceRes.json(),
+          calculationsRes.json(),
+          // walletRes.json()
+        ]);
+      })
+      .then(([advice, calculations]) => {
+        setTimeout(
+          () => this.setState({advice:advice, entries: calculations}),
+          2000
+        );
+      })
+      .catch(error => {
+        console.error({ error });
+      });
+  }
+
   handleDeleteEntry=(id)=>{
     this.setState({
       entries: this.state.entries.filter(entry => entry.id !== parseInt(id) )
@@ -134,12 +174,11 @@ export default class Networth extends Component {
     resources: resources, networth: true, id: this.state.id+1})
   }
   render(){
-
   return (
     <ApiContext.Provider value={{
       entries: this.state.entries, 
       handleDeleteEntry: this.handleDeleteEntry,
-
+      advice: this.state.advice
     }}>
     <div className="Networth">
       <h1>Your personalized financial planning dashboard:</h1>

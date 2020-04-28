@@ -3,6 +3,7 @@ import './Nav.css'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from "react-router-dom";
+import TokenService from '../services/token-service'
 
 
 export default class Menu extends Component{
@@ -26,9 +27,12 @@ export default class Menu extends Component{
     }
 
     render(){
-    let data= [{id: 1, name: "About", path: '/about'}, {id: 2, name: "Create an Account", path: '/register'},
-    {id: 3, name: "Networth", path: '/networth'}]
-       
+    let data = [{id: 1, name: "About", path: '/about'}, {id: 2, name: "Create an Account", path: '/register'}]
+    if(TokenService.hasAuthToken() ===true){
+       data= [{id: 1, name: "About", path: '/about'}, 
+        {id: 3, name: "Networth", path: '/networth'}]
+    }
+
   
   return ( <div className="Menu" onMouseEnter={this.handleDropDown}  onMouseLeave={this.handleUnDrop}>
     <FontAwesomeIcon className='burgerIcon' onClick={this.handleDropDown}  icon={faBars}/>

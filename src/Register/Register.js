@@ -1,18 +1,46 @@
 import React, {Component} from 'react';
+import AuthApiService from '../services/auth-api-service'
 import './Register.css'
          
          
-         
-export default class Register extends Component{         
- 
+export default class Register extends Component{   
+  state={error: null}      
+  handleSubmit = ev => {
+    ev.preventDefault()
+    const { full_name, nick_name, user_name, password } = ev.target
+
+     console.log('registration form submitted')
+     console.log({ full_name, nick_name, user_name, password })
+     this.setState({ error: null })
+     AuthApiService.postUser({
+       user_name: user_name.value,
+       password: password.value,
+       full_name: full_name.value,
+       nickname: nick_name.value,
+     })
+       .then(user => {
+        full_name.value = ''
+        nick_name.value = ''
+        user_name.value = ''
+        password.value = ''
+        this.props.onRegistrationSuccess()
+       })
+       .catch(res => {
+         this.setState({ error: res.error })
+       })
+  }
     render(){
+      let error=this.state.error
 
     return(
         <div id="registrationComponent">
             <br/>
             <br/>
-         <form className='RegistrationForm'>
-        {/* // onSubmit={this.handleSubmit}> */}
+            <div role='alert'>
+          {error && <p className='red'>{error}</p>}
+        </div>
+         <form className='RegistrationForm'
+           onSubmit={this.handleSubmit}>
         <div className='full_name'>
           <label htmlFor='RegistrationForm__full_name'>
             Full name:  {' '}
@@ -41,7 +69,7 @@ export default class Register extends Component{
             Password: {' '} 
           </label>
           <input
-            autoComplete='new-password'
+            autoComplete='newpassword'
             name='password'
             type='password'
             required

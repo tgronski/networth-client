@@ -4,13 +4,7 @@
     color: white 
 }
 
-.App-header{
-    background-color: #282c34;
-     /* background-color: #152950; */
-    color: white;
-    height: 140px;
-   
-  }
+
 
   #topLeftNav{
       display: flex;
@@ -27,6 +21,10 @@
     position: sticky;
     top:0;
     margin: 0;
+    background-color: #152950;
+   color: white;
+   height: 140px;
+  
   }
   .burgerIcon{
       color: white;
