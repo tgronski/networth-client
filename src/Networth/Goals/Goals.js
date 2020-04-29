@@ -9,13 +9,17 @@ export default class Goals extends Component{
 
   render(){
     let goals= this.context.goals
-    let number = this.context.entries.length
-    let recentValue= this.context.entries[number-1]
+    let networth= 0
+    let number = null
+    let recentValue= null
+    if (this.context.entries[0] !=null && this.context.entries[0].length>0){
+      number = this.context.entries[0].length
+      recentValue= this.context.entries[0][number-1]
+    }
     let options = { style: 'currency', currency: 'USD' };
     let numberFormat = new Intl.NumberFormat('en-US', options);
-    let networth= 0
     if (recentValue!=null){
-      networth =(recentValue.total)
+      networth =(recentValue.networth_total)
       networth= Number(networth.replace(/[^0-9.-]+/g,""))
 
       }

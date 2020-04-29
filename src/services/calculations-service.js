@@ -3,9 +3,9 @@ import config from '../config'
 
 const CalculationApiService = {
   getCalculations() {
-    console.log(`${TokenService.getAuthToken()}`)
     return fetch(`${config.API_ENDPOINT}/api/calculations`, {
       headers: {
+        'content-type': 'application/json',
         'authorization': `bearer ${TokenService.getAuthToken()}`,
       },
     })
@@ -15,7 +15,8 @@ const CalculationApiService = {
           : res.json()
       )
   },
-  postCalculations(calculationsid, total, total_value, calculationsdate ) {
+  postCalculations(networth_total,networth_total_value , networth_investments, networth_loans, 
+    networth_credits, networth_savings ) {
     return fetch(`${config.API_ENDPOINT}/api/calculations`, {
       method: 'POST',
       headers: {
@@ -23,7 +24,7 @@ const CalculationApiService = {
         'authorization': `bearer ${TokenService.getAuthToken()}`,
       },
       body: JSON.stringify({
-        calculationsid,  total, total_value, calculationsdate
+        networth_total,networth_total_value , networth_investments, networth_loans, networth_credits, networth_savings
       }),
     })
       .then(res =>
@@ -31,7 +32,27 @@ const CalculationApiService = {
           ? res.json().then(e => Promise.reject(e))
           : res.json()
       )
-  }
-}
+  },
+  deleteCalculations(calculationsid){
+    return fetch(`${config.API_ENDPOINT}/api/calculations/${calculationsid}`, {
+      method: 'DELETE',
+      headers: {
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
+      },
+
+    })
+    .then(res => {
+      if (!res.ok) {
+        return res.json().then(e => Promise.reject(e));
+      }
+    })
+      .catch(error => {
+        console.error({ error });
+      })
+
+  },
+};
+
+
 
 export default CalculationApiService

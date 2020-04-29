@@ -10,8 +10,16 @@ import Networth from './Networth/Networth'
 import TokenService from './services/token-service'
 import AuthApiService from './services/auth-api-service'
 import IdleService from './services/idle-service'
+import PrivateRoute from './Routes/PrivateRoute'
+import PublicOnlyRoute from './Routes/PublicRoute'
 
 export default class App extends Component {
+  constructor(props){
+    super(props);
+    this.state={
+    }
+  }
+
   componentDidMount() {
     /*
       set the function (callback) to call when a user goes idle
@@ -68,10 +76,11 @@ export default class App extends Component {
   renderMainRoutes() {
     return(<span>
       <Route  exact path="/about" component={About}/>
-      <Route  exact path="/" component={Main}/>
-      <Route exact path='/register' component={Register}/>
-      <Route exact path='/login' component={Login}/>
-      <Route exact path='/networth' component={Networth}/>
+      <PublicOnlyRoute  exact path="/" component={Main}/>
+      <PublicOnlyRoute exact path='/register' component={Register}/>
+      <PublicOnlyRoute exact path='/login' component={Login}/>
+      <PrivateRoute exact path='/networth' component={Networth}/>
+      <PrivateRoute exact path='/' component={Networth}/>
     </span>)
   }
   render() {

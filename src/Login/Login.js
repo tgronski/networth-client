@@ -3,15 +3,29 @@ import TokenService from '../services/token-service'
 import AuthApiService from '../services/auth-api-service'
 import './Login.css'
          
-export default class Login extends Component{         
-
+export default class Login extends Component{   
   static defaultProps = {
-    onLoginSuccess: () => {
-    console.log('loggedin')
+    onLoginSuccess: () => {},
+    location: {},
+    history: {
+      push: () => {},
     }
   }
+  constructor(props){
+    super(props);
+    this.state={
+      error: null
+    }
+  }      
 
-  state = { error: null}
+
+  handleLoginSuccess = () => {
+    const { history } = this.props
+    const destination = '/networth' 
+    history.push(destination)
+  }
+
+
 
   handleSubmitJwtAuth = ev => {
         ev.preventDefault()
@@ -26,8 +40,8 @@ export default class Login extends Component{
       .then(res => {
         user_name.value = ''
         password.value = ''
-        // TokenService.saveAuthToken(res.authToken)
         this.props.onLoginSuccess()
+        this.handleLoginSuccess()
       })
       .catch(res => {
         this.setState({ error: res.error })

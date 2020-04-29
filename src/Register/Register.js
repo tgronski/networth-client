@@ -4,7 +4,19 @@ import './Register.css'
          
          
 export default class Register extends Component{   
+  static defaultProps = {
+    onRegistrationSuccess: () => {},
+    history: {
+      push: () => {},
+    },
+  }
   state={error: null}      
+
+  handleRegistrationSuccess = user => {
+    const { history } = this.props
+    history.push('/login')
+  }
+
   handleSubmit = ev => {
     ev.preventDefault()
     const { full_name, nick_name, user_name, password } = ev.target
@@ -24,6 +36,8 @@ export default class Register extends Component{
         user_name.value = ''
         password.value = ''
         this.props.onRegistrationSuccess()
+        this.handleRegistrationSuccess()
+
        })
        .catch(res => {
          this.setState({ error: res.error })
