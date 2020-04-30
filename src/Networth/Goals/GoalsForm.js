@@ -3,33 +3,40 @@ import './Goals.css'
 import ApiContext from '../ApiContext'
 import Goals from "./Goals"
 import GoalsWheel from './GoalsWheel';
+import GoalsApiService from "../../services/goals-service"
 
 export default class GoalsForm extends Component{    
     constructor(props){
         super(props);
         this.state={
-            goals: [],
-            goal_titleEntry:'',
-            goal_valueEntry:'',
+            goals: [{}],
+            goal_name:'',
+            goal_value:'',
             error: "",
             id: 0, 
         }
     }
     static contextType = ApiContext 
-
+    
+    componentDidMount(){
+      GoalsApiService.getGoals()
+      .then(res=>
+        this.setState({goals: [res]})
+        
+      )
+      
+    }
 
     handleDeleteGoal=(e)=>{
-        e.preventDefault();
-        let id= e.target.id
-        this.setState({
-          goals: this.state.goals.filter(goal => goal.id !== parseInt(id) )
-        })
-      }
+      e.preventDefault();
+      let id= e.target.id
+      GoalsApiService.deleteGoals(id)
+    }
 
     handleGoal=e=>{
         e.preventDefault();
         let name=e.target.name
-        this.setState({[`${name}Entry`]:e.target.value})
+        this.setState({[`${name}`]: e.target.value})
         
     }
     handleSubmitGoals=(e)=>{
@@ -37,6 +44,8 @@ export default class GoalsForm extends Component{
         let networth= 0
         let number = null
         let recentValue= null
+        let goal_name= this.state.goal_name
+        let goal_value=this.state.goal_value
         if (this.context.entries[0] !=null && this.context.entries[0].length>0){
           number = this.context.entries[0].length
           recentValue= this.context.entries[0][number-1]
@@ -46,17 +55,27 @@ export default class GoalsForm extends Component{
           networth= Number(networth.replace(/[^0-9.-]+/g,""))
   
         }
-        if(this.state.goals.length<=2){    
-        this.setState({goals: [...this.state.goals,
-                {id: this.state.id + 1, goalname: this.state.goal_titleEntry,goalvalue: this.state.goal_valueEntry}],
-            id: this.state.id+1})
+        if(this.state.goals[0] !=null && this.state.goals[0].length<=2){
+          GoalsApiService.postGoals(goal_name, goal_value)  
         }
         else this.setState({error: "Limit to 3 goals"})
         
     }
+
+
+
+  componentDidUpdate(){ 
+    GoalsApiService.getGoals()
+    .then(res=>
+
+        this.setState({goals: [res]})
+        
+      )
+  }
+
+
   render(){
       let goals=this.state.goals
-
 
   return (
     <ApiContext.Provider value={{
@@ -83,7 +102,7 @@ export default class GoalsForm extends Component{
         </label>
         <input
         required
-        name='goal_title'
+        name='goal_name'
         maxLength="36"
         size="29"
         onChange={e=>this.handleGoal(e)}
@@ -111,7 +130,7 @@ export default class GoalsForm extends Component{
         Add Goal
         </button>
         <div>
-        {goals.length<=2
+        {goals[0].length<=2
         ? null
         :<p>{this.state.error}</p>}
         </div>

@@ -13,12 +13,11 @@ export default class Header extends Component {
       }
     
   renderLogoutLink() {
-    console.log(TokenService.hasAuthToken())
     return (
       <div className='Header__logged-in'>
         <p><Link className='menuLink'
           onClick={this.handleLogoutClick()}
-          to='/'>
+          to='/main'>
           Logout
         </Link></p>
       </div>

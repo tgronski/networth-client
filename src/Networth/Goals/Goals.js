@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import ApiContext from '../ApiContext'
+import GoalsApiService from "../../services/goals-service"
 
 
 export default class Goals extends Component{    
@@ -27,16 +28,16 @@ export default class Goals extends Component{
 
         <div className='goalsList' >
           <h3>Saved Goals List:</h3>
-          {goals.length>0
+          {goals[0] != null && goals[0].length>0
           ? (<ul >
 
-          {goals.map(goal=>(
+          {goals[0].map(goal=>(
               
-              <li  className="goalsListItem" key={goal.id}>{goal.goalname}:{' '}{numberFormat.format(goal.goalvalue)} 
+              <li  className="goalsListItem" key={goal.id}>{goal.goal_name}:{' '}{numberFormat.format(goal.goal_value)} 
               <br/>
               Percent to Goal: {' '}
-              {networth<goal.goalvalue
-              ?(`${((networth/parseFloat(goal.goalvalue))*100).toFixed(2)}%`)
+              {networth<goal.goal_value
+              ?(`${((networth/parseFloat(goal.goal_value))*100).toFixed(2)}%`)
               : "100%"}
               <button id={goal.id} onClick={e=>this.context.handleDeleteGoal(e)}>Delete</button></li>
                ))}

@@ -9,7 +9,7 @@ export default class GoalsWheel extends Component{
 
 
   render(){
-    let goals= this.context.goals
+    let goals= this.context.goals[0]
     let networth= 0
     let number = null
     let recentValue= null
@@ -23,9 +23,12 @@ export default class GoalsWheel extends Component{
 
       }
   let sumGoals = 0 
-  for(let i=0; i<goals.length; i++){
-          sumGoals = parseFloat(goals[i].goalvalue)+sumGoals
+  if(goals != null){
+    for(let i=0; i<goals.length; i++){
+        sumGoals = parseFloat(goals[i].goal_value)+sumGoals
+}
   }
+  
   let data= [0]
   if(sumGoals>0 && networth<sumGoals){
       data = [networth/parseFloat(sumGoals)*100,100-(networth/parseFloat(sumGoals)*100)]

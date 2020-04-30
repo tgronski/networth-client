@@ -26,28 +26,13 @@ export default class Menu extends Component{
         this.setState({showDropDown: false})
     
     }
-    handleLogoutClick=()=> {
-        TokenService.clearAuthToken()
-        TokenService.clearCallbackBeforeExpiry()
-        IdleService.unRegisterIdleResets()
-      }
+
     
-      renderLogoutLink() {
-        return (
-          <div className='Header__logged-in'> <p><Link className='menuLink'
-            onClick={this.handleLogoutClick()}
-           >
-            Logout
-            </Link></p>      </div>
-        )
-      }
     render(){
     let data = [{id: 1, name: "About", path: '/about'}, {id: 2, name: "Create an Account", path: '/register'},{id:3, name:'Log In', path: '/login'}]
-    let logout=null
     if(TokenService.hasAuthToken() ===true){
        data= [{id: 1, name: "About", path: '/about'}, 
         {id: 3, name: "Networth", path: '/networth'} ]
-        logout= this.renderLogoutLink()
     }
 
   
@@ -63,7 +48,6 @@ export default class Menu extends Component{
         :(null
         )
     }
-    {logout}
     </div>
   );
 }

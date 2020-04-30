@@ -5,7 +5,7 @@ import '../App.css';
 import Testamonials from '../Testamonials/Testamonials';
 
 export default class Main extends Component {
-
+  
   render() {
   return (
     <div className="Main">

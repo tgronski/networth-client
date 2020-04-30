@@ -16,7 +16,6 @@ export default class Overtime extends Component{
 
   render(){
     let entries= this.context.entries[0]
-    console.log(entries)
     let options = { style: 'currency', currency: 'USD' };
     let numberFormat = new Intl.NumberFormat('en-US', options);
     if(entries != null && entries.length>0){

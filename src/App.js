@@ -76,6 +76,7 @@ export default class App extends Component {
   renderMainRoutes() {
     return(<span>
       <Route  exact path="/about" component={About}/>
+      <PublicOnlyRoute  exact path="/main" component={Main}/>
       <PublicOnlyRoute  exact path="/" component={Main}/>
       <PublicOnlyRoute exact path='/register' component={Register}/>
       <PublicOnlyRoute exact path='/login' component={Login}/>

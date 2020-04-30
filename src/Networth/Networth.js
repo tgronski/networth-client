@@ -103,19 +103,6 @@ export default class Networth extends Component {
   }
 
 
-  // handleOtherDescription=(e)=>{
-  //   e.preventDefault();
-  //   if(this.state.showDescription===false){
-  //     this.setState({showDescription: true})
-  //     }
-  //     else this.setState({showDescription: false})
-  
-  // }  
-  // handleOtherDescriptionDrop=(e)=>{
-  //   e.preventDefault();
-  //    this.setState({showDescription: false})
-  // }
-
   handleSubmit(e){
     e.preventDefault();
     let options = { style: 'currency', currency: 'USD' };
@@ -124,8 +111,6 @@ export default class Networth extends Component {
     let investments=parseFloat(this.state.InvestmentsStocksBonds)
     let savings = parseFloat(this.state.Savings)
     let loans = parseFloat(this.state.Loans)
-    // let otherDebt = parseFloat(this.state.otherDebt)
-    // let otherAssets = parseFloat(this.state.otherAssets)
     let resources = this.state.resources
     if(credit>0 || loans >0){
       resources = true
