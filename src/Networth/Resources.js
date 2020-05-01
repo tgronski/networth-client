@@ -9,10 +9,13 @@ export default class Resources extends Component{
     let advice=this.context.advice
     let assets=advice.filter(advice=>advice.category===2)
     let debts=advice.filter(advice=>advice.category===1)
-    let length=this.context.entries.length
+    let length=0
+    if(this.context.entries[0] != null){
+      length= this.context.entries[0].length
+    }
     let updatednetworth=0
     if(length>0){
-      updatednetworth = this.context.entries[length-1]
+      updatednetworth = this.context.entries[0][length-1]
     }
 
   return (

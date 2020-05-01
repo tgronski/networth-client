@@ -8,6 +8,8 @@ import Overtime from "./Overtime"
 import Resources from './Resources'
 import ApiContext from './ApiContext'
 import LineChart from './LineChart'
+import Header from './Header'
+
 import config from "../config";
 import CalculationApiService from "../services/calculations-service"
 import TokenService from '../services/token-service'
@@ -58,16 +60,16 @@ export default class Networth extends Component {
 
 
         return Promise.all([
-          res.json(),
+          setTimeout(
+            () => this.setState({advice:[res]}),
+            2000
+          )
 ,
        
-        ]);
-      })
-      .then(([advice]) => {
-        setTimeout(
-          () => this.setState({advice:[advice]}),
-          2000
-        );
+        ])
+      // })
+      // .then(([advice]) => {
+      //   ;
       })
       .catch(error => {
         console.error({ error });
@@ -144,14 +146,14 @@ export default class Networth extends Component {
 
   render(){
     let wallets = this.state.wallet
-    
   return (
     <ApiContext.Provider value={{
       entries: this.state.entries, 
       handleDeleteEntry: this.handleDeleteEntry,
       advice: this.state.advice
-    }}>
+    }}> 
     <div className="Networth">
+      <Header/>
       <h1>Your personalized financial planning dashboard:</h1>
       <div className='Header__logged-in'>
       </div>
@@ -170,7 +172,8 @@ export default class Networth extends Component {
           
           {wallets.length>0
           ? (<div>{wallets.map(wallet =>
-            <><label key = {wallet.id} htmlFor={wallet.wallet_categories}><FontAwesomeIcon className='icon' icon={wallet.icon.slice}/>{' '}{wallet.wallet_categories} $: {' '}</label>
+            // <><label key = {wallet.id} htmlFor={wallet.wallet_categories}><FontAwesomeIcon className='icon' icon={wallet.icon.slice}/>{' '}{wallet.wallet_categories} $: {' '}</label>
+            <><label key = {wallet.id} htmlFor={wallet.wallet_categories}>{' '}{wallet.wallet_categories} $: {' '}</label>
             <input type='number' className='input' name={wallet.wallet_categories}  onChange={e=>this.handleNetworth(e)}></input></>)}
             <br/>
             </div>)
