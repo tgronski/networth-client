@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
-import ApiContext from './ApiContext'
-
+import ApiContext from '../ApiContext'
+import './Resources.css'
 
 export default class Resources extends Component{  
   static contextType = ApiContext;
@@ -19,8 +19,11 @@ export default class Resources extends Component{
     }
   return (
     <div className="Resources">
-      {length>0
-      ?( <h2>Financial Planning Resources:</h2> )
+      {length===0
+      ?(<div> 
+        <h2>Financial Planning Resources:</h2> 
+        <i>Submit your most recent networth data to get the most accurate information</i>
+        </div>)
       
       :null
       }
@@ -31,7 +34,7 @@ export default class Resources extends Component{
       : null
     )}
       {(updatednetworth.networth_total_value>0
-      ?(<ul className="list" id='debtList'>
+      ?(<ul className="list" id='assetList'>
       
            <li key={assets.id}>We see that you are saving money, which is great! You may want to consider an investment account like {assets.content} to continue saving. </li>
             

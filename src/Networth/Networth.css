@@ -61,18 +61,15 @@
      margin-bottom: 0;
  }
 .profile{
-    padding: 30px;
     margin-left: auto;
     margin-right: auto;
     width: 80%;
     border: solid black 3px;
     font-size: 22px;
     text-decoration: center;
-
-    
 }
 .Overtime-list{
-    height: 160px;
+    max-height: 160px;
     overflow: scroll;
     border: gray solid 3px;
 }
@@ -87,23 +84,11 @@
     height: 100vh;
 }
 .report{
-    height: 225px;
+    height: 200px;
     max-width: 200px;
     font-size: 16px;
 }
-.list{
-    display: flex; 
-    align-content: center;
-    flex-direction: column;
-    justify-content: space-evenly;
-    height: 200px;
-    max-width:700px;
-    list-style-type: none;
-    border: solid black 2px;
-    padding: 20px;
-    margin-left: auto;
-    margin-right: auto
-}
+
 .lineChartSvg{
     border: black solid 5px
 }
@@ -144,11 +129,7 @@
     stroke: steelblue;
     stroke-width: 1.5px;
 }
-.Resources{
-    width: 90%;
-    margin-left: auto; 
-    margin-right: auto
-}
+
 .WalletEntries{
     text-align: left;
     display:flex
@@ -159,6 +140,7 @@
 .WalletList{
     display:flex;
     flex-direction: column;
+    margin-left: 5px;
 }
 
 @media only screen and (min-width: 900px) {

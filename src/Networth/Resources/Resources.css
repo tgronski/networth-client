@@ -1,0 +1,20 @@
+.Resources{
+    width: 90%;
+    margin-left: auto; 
+    margin-right: auto;
+    
+}
+.list{
+    display: flex; 
+    align-content: center;
+    flex-direction: column;
+    justify-content: space-evenly;
+    max-height: 200px;
+    max-width:700px;
+    list-style-type: none;
+    border: solid rgba(0, 0, 0, 0.557) 2px;
+    padding: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: ghostwhite;
+}

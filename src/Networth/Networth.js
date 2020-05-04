@@ -5,7 +5,7 @@ import NetworthPie from './NetworthPie';
 import GoalsForm from './Goals/GoalsForm'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Overtime from "./Overtime"
-import Resources from './Resources'
+import Resources from './Resources/Resources'
 import ApiContext from './ApiContext'
 // import LineChart from './LineChart'
 import Header from './Header'
@@ -74,8 +74,9 @@ export default class Networth extends Component {
   handleDeleteEntry=()=>{
     CalculationApiService.getCalculations()
     .then(res=>
-      this.setState({entries: [res]})  
+      this.setState({entries: [res],error: ''})  
     )
+   
 
   }
   handleNetworth=(e)=>{
@@ -133,7 +134,6 @@ export default class Networth extends Component {
   }
   componentWillUnmount(){
     this._mounted = false;
-  console.log('unmounted')
 }
   icons=(input)=>{
     if(input==='faCreditCard'){
@@ -159,7 +159,6 @@ export default class Networth extends Component {
 
   render(){
     let wallets = this.state.wallet
-  
   if (wallets.length>0){
   return (
     <ApiContext.Provider value={{
@@ -221,7 +220,7 @@ export default class Networth extends Component {
 
     <Resources />
     <div className="chart">
-    <Overtime entries={this.context.entries}/> 
+    <Overtime /> 
     {/* <LineChart data={this.state.entries}/> */}
     </div>
     <GoalsForm/>

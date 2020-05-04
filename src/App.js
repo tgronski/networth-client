@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Nav from './Nav/Nav';
 import Main from './Main/Main';
 import './App.css';
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import About from "./About/About"
 import Register from './Register/Register' 
 import Login from './Login/Login'
@@ -48,7 +48,9 @@ export default class App extends Component {
     }
   }
 
+
   componentWillUnmount() {
+    console.log('unmounted')
     /*
       when the app unmounts,
       stop the event listeners that auto logout (clear the token from storage)
@@ -76,7 +78,7 @@ export default class App extends Component {
 
   }
   renderMainRoutes() {
-    return(<span>
+    return(<Switch>
       <Route  exact path="/about" component={About}/>
       <PublicOnlyRoute  exact path="/main" component={Main}/>
       <PublicOnlyRoute  exact path="/" component={Main}/>
@@ -84,7 +86,7 @@ export default class App extends Component {
       <PublicOnlyRoute exact path='/login' component={Login}/>
       <PrivateRoute exact path='/networth' component={Networth}/>
       <PrivateRoute exact path='/' component={Networth}/>
-    </span>)
+    </Switch>)
   }
   render() {
   return (

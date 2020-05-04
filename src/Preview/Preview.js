@@ -27,7 +27,7 @@ export default class Preview extends Component{
         <section className="Preview-text">
         <h1><Link className='mainLink' to='register'>Create</Link> an account or <Link className='mainLink' to='/login'>log in</Link> to track your net worth & see your full report!</h1>
         <br/>
-        <h2>Add goals and learn more about how you can save.</h2>
+        <h2 className='secondDescription'>Add goals and learn more about how you can save.</h2>
         </section>
     
         <svg className="Pie" >
