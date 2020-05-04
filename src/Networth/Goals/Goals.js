@@ -1,6 +1,5 @@
 import React,{Component} from 'react';
 import ApiContext from '../ApiContext'
-import GoalsApiService from "../../services/goals-service"
 
 
 export default class Goals extends Component{    

@@ -1,22 +1,22 @@
 import React, {Component} from 'react';
+
 import './Networth.css'
 import NetworthPie from './NetworthPie';
 import GoalsForm from './Goals/GoalsForm'
-// import { } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Overtime from "./Overtime"
 import Resources from './Resources'
 import ApiContext from './ApiContext'
-import LineChart from './LineChart'
+// import LineChart from './LineChart'
 import Header from './Header'
-
-import config from "../config";
+import { faCoffee, faCreditCard, faLandmark, faHandHoldingUsd, faPiggyBank, faMoneyBillAlt, faMoneyCheck, faQuestionCircle} from "@fortawesome/free-solid-svg-icons";
+import AdviceApiService from '../services/advice-service'
 import CalculationApiService from "../services/calculations-service"
-import TokenService from '../services/token-service'
 import WalletsApiService from '../services/wallet-service'
 import { library } from "@fortawesome/fontawesome-svg-core";
-import {faCreditCard, faLandmark, faHandHoldingUsd, faPiggyBank, faMoneyBillAlt, faMoneyCheck, faQuestionCircle} from "@fortawesome/free-solid-svg-icons";
-library.add(
+import TokenService from '../services/token-service';
+
+library.add( faCoffee,
   faCreditCard, faLandmark, faHandHoldingUsd, faPiggyBank, faMoneyBillAlt, faMoneyCheck, faQuestionCircle)
 
 
@@ -31,9 +31,8 @@ export default class Networth extends Component {
         Savings: 0,
         otherDebt: 0,
         otherAssets: 0,
-        total: 0,
+        total: '$0.00',
         entries: [{}],
-        resources: null,
         networth: false, 
         error: '',
         id:0,
@@ -46,43 +45,29 @@ export default class Networth extends Component {
   static contextType = ApiContext 
 
   componentDidMount() {
+    this._mounted = true;
     Promise.all([
-      fetch(`${config.API_ENDPOINT}/api/advice`),
-      
+      AdviceApiService.getAdvice(),
+      CalculationApiService.getCalculations(),
+      WalletsApiService.getWallets()
       
       ])
 
       .then((res) => {
- 
-        if (!res.ok) 
-          return res.json().then(e => Promise.reject(e));
-
-
-
+        if(this._mounted) {
         return Promise.all([
-          setTimeout(
-            () => this.setState({advice:[res]}),
+          this.interval = setTimeout(
+            () => this.setState({entries: [res[1]],wallet:res[2], advice: [res[0]]}),
             2000
           )
-,
        
-        ])
-      // })
-      // .then(([advice]) => {
-      //   ;
+        ])}
       })
       .catch(error => {
         console.error({ error });
       });
-  CalculationApiService.getCalculations()
-      .then(res=>
-        this.setState({entries: [res]})
-        
-      )
-      WalletsApiService.getWallets()
-      .then(res=>
-        this.setState({wallet:res})
-        )
+
+  
   }
 
 
@@ -113,12 +98,6 @@ export default class Networth extends Component {
     let investments=parseFloat(this.state.InvestmentsStocksBonds)
     let savings = parseFloat(this.state.Savings)
     let loans = parseFloat(this.state.Loans)
-    let resources = this.state.resources
-    if(credit>0 || loans >0){
-      resources = true
-    }
-    else resources = false
-
     let total=investments  - credit  + savings - loans 
     total=numberFormat.format(total)
     let networth_total_value= Number(total.replace(/[^0-9.-]+/g,""))
@@ -132,20 +111,56 @@ export default class Networth extends Component {
       total: ''})
     }
     else CalculationApiService.postCalculations(networth_total,networth_total_value , networth_investments, networth_loans, 
-    networth_credits, networth_savings)    
+    networth_credits, networth_savings) 
+    .then(res=>{
+      this.setState({total: total})
+    })   
+    .catch(res=>{
+      this.setState({error: res.error})
+    })
   }
   componentDidUpdate(){ 
+    this._mounted = true
     CalculationApiService.getCalculations()
-    .then(res=>
-
+    .then(res=>{
+      if(this._mounted) {
         this.setState({entries: [res]})
-        
+      }}
       )
+    .catch(res=>{
+      this.setState({error: res.error})
+    })
   }
-
+  componentWillUnmount(){
+    this._mounted = false;
+  console.log('unmounted')
+}
+  icons=(input)=>{
+    if(input==='faCreditCard'){
+      return  faCreditCard
+    }
+    if(input==='faLandmark'){
+      return  faLandmark
+    }
+    if(input==='faHandHoldingUsd'){
+      return  faHandHoldingUsd
+    }
+    if(input==='faPiggyBank'){
+      return  faPiggyBank
+    }
+    if(input==='faMoneyCheck'){
+      return  faMoneyCheck
+    }
+    if(input==='faMoneyBillAlt'){
+      return  faMoneyBillAlt
+    }
+  }
+// max inputs is 9 digits
 
   render(){
     let wallets = this.state.wallet
+  
+  if (wallets.length>0){
   return (
     <ApiContext.Provider value={{
       entries: this.state.entries, 
@@ -171,10 +186,11 @@ export default class Networth extends Component {
           <div className="WalletForm">
           
           {wallets.length>0
-          ? (<div>{wallets.map(wallet =>
-            // <><label key = {wallet.id} htmlFor={wallet.wallet_categories}><FontAwesomeIcon className='icon' icon={wallet.icon.slice}/>{' '}{wallet.wallet_categories} $: {' '}</label>
-            <><label key = {wallet.id} htmlFor={wallet.wallet_categories}>{' '}{wallet.wallet_categories} $: {' '}</label>
-            <input type='number' className='input' name={wallet.wallet_categories}  onChange={e=>this.handleNetworth(e)}></input></>)}
+          ? (<div className="WalletList">{wallets.map(wallet =>
+            < div key={wallet.id}>
+            
+            <label  htmlFor={wallet.wallet_categories}><FontAwesomeIcon className='icon'  icon={this.icons(wallet.icon)}/>{' '}{wallet.wallet_categories} $: {' '}</label>
+            <input type='number'  className='input' name={wallet.wallet_categories}  onChange={e=>this.handleNetworth(e)}></input></div>)}
             <br/>
             </div>)
           :null}
@@ -203,7 +219,7 @@ export default class Networth extends Component {
       </div>
 
 
-    <Resources resources={this.state.resources}/>
+    <Resources />
     <div className="chart">
     <Overtime entries={this.context.entries}/> 
     {/* <LineChart data={this.state.entries}/> */}
@@ -212,6 +228,12 @@ export default class Networth extends Component {
     </div>
     </ApiContext.Provider>
   );
-}
+  }
+  return (<> 
+  <Header/>
+  <p>Prepping our financial planning tools</p>
+  </>)
+  }
+
 }
 

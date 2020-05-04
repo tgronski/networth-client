@@ -16,16 +16,32 @@ export default class GoalsForm extends Component{
             id: 0, 
         }
     }
+
+
+
     static contextType = ApiContext 
     
     componentDidMount(){
+      this._mounted = true;
       GoalsApiService.getGoals()
-      .then(res=>
+      .then(res=>{
+        if(this._mounted) {
         this.setState({goals: [res]})
-        
+        }}
       )
       
     }
+
+  componentDidUpdate(){ 
+    this._mounted = true;
+    GoalsApiService.getGoals()
+    .then(res=>{
+      if(this._mounted) {
+
+        this.setState({goals: [res]})
+      }}
+      )
+  }
 
     handleDeleteGoal=(e)=>{
       e.preventDefault();
@@ -41,7 +57,6 @@ export default class GoalsForm extends Component{
     }
     handleSubmitGoals=(e)=>{
         e.preventDefault();
-        let networth= 0
         let number = null
         let recentValue= null
         let goal_name= this.state.goal_name
@@ -50,28 +65,30 @@ export default class GoalsForm extends Component{
           number = this.context.entries[0].length
           recentValue= this.context.entries[0][number-1]
         }
+        let networth= 0
         if (recentValue!=null){
           networth =(recentValue.networth_total)
           networth= Number(networth.replace(/[^0-9.-]+/g,""))
   
         }
         if(this.state.goals[0] !=null && this.state.goals[0].length<=2){
-          GoalsApiService.postGoals(goal_name, goal_value)  
+          GoalsApiService.postGoals(goal_name, goal_value) 
+          .then(res => {
+            this.setState({goal_name: '', goal_value:''})
+          })
+          .catch(res => {
+            this.setState({ error: res.error})
+          }) 
         }
         else this.setState({error: "Limit to 3 goals"})
         
     }
 
+    componentWillUnmount(){
+      console.log('unmounted')
+      this._mounted = false;
+    }
 
-
-  componentDidUpdate(){ 
-    GoalsApiService.getGoals()
-    .then(res=>
-
-        this.setState({goals: [res]})
-        
-      )
-  }
 
 
   render(){
@@ -105,6 +122,7 @@ export default class GoalsForm extends Component{
         name='goal_name'
         maxLength="36"
         size="29"
+        value={this.state.goal_name } 
         onChange={e=>this.handleGoal(e)}
         id='GoalsForm__goal_title'>
         
@@ -119,6 +137,7 @@ export default class GoalsForm extends Component{
         required
         name='goal_value'
         type="number"
+        value={this.state.goal_value}
         onChange={e=>this.handleGoal(e)}
         id='GoalsForm__goal_value'>
         </input>

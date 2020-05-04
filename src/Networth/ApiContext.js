@@ -1,9 +1,9 @@
 import React from 'react'
 
 export default React.createContext({
-  entries: [],
+  entries: [{}],
   handleDeleteEntry:()=>{},
-  goals: [], 
+  goals: [{}], 
   handleDeleteGoal: ()=>{},
-  advice:[]
+  advice:[{}]
 })

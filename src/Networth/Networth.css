@@ -54,13 +54,14 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin:0 !important
   
  }
  .wallet>h2{
      margin-bottom: 0;
  }
 .profile{
-    
+    padding: 30px;
     margin-left: auto;
     margin-right: auto;
     width: 80%;
@@ -150,9 +151,14 @@
 }
 .WalletEntries{
     text-align: left;
+    display:flex
 }
 .WalletTitle{
     text-align: center;
+}
+.WalletList{
+    display:flex;
+    flex-direction: column;
 }
 
 @media only screen and (min-width: 900px) {

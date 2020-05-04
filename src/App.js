@@ -62,6 +62,7 @@ export default class App extends Component {
 
   logoutFromIdle = () => {
     /* remove the token from localStorage */
+    console.log('clearing')
     TokenService.clearAuthToken()
     /* remove any queued calls to the refresh endpoint */
     TokenService.clearCallbackBeforeExpiry()
@@ -72,6 +73,7 @@ export default class App extends Component {
       so we need to tell React to rerender
     */
     this.forceUpdate()
+
   }
   renderMainRoutes() {
     return(<span>

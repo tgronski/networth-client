@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import TokenService from '../services/token-service'
 import AuthApiService from '../services/auth-api-service'
 import './Login.css'
          
@@ -18,6 +17,9 @@ export default class Login extends Component{
     }
   }      
 
+  handleRedirect=()=>{
+    this.setState({error: "You have been logged out due to inactivity"})
+  }
 
   handleLoginSuccess = () => {
     const { history } = this.props

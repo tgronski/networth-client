@@ -4,7 +4,6 @@ import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from "react-router-dom";
 import TokenService from '../services/token-service'
-import IdleService from '../services/idle-service'
 
 
 export default class Menu extends Component{

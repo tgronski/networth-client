@@ -42,7 +42,7 @@ export default class Overtime extends Component{
      <button id={entry.id} onClick={this.handleClickDelete}>Delete</button></p>
      }))}
      </div>)
-     : null
+     : <i>Add your personal finance information to track your networth over time</i>
       }
      {entries != null && entries.length>1
      ?(<p>Over your two most recent entries, your net worth has changed by {numberFormat.format(entries[entries.length-1].networth_total_value-entries[entries.length-2].networth_total_value)}</p>)
