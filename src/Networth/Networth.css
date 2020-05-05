@@ -152,6 +152,7 @@
     
 }
 .WalletTitle{
+    padding-top: 5%;
     text-align: center;
 }
 .WalletList{
@@ -180,7 +181,6 @@
     }
     .profile{
         width: 70%;
-        max-height: 500px
     }
 
 }

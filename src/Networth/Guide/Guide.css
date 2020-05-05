@@ -6,7 +6,7 @@
     flex-direction: column;
     font-size: 18px;
     width: 100%;
-    height: 200px;
+    height: 400px;
     margin-bottom: 2%;
     padding-top: 2%;
     padding-bottom: 2%;
@@ -15,13 +15,35 @@
 .Guide-ul{
 padding: 0;
 list-style-type: none;
-width: 30%;
+width: 90%;
 display: flex;
-flex-direction: row;
+
 justify-content: space-evenly;
 }
 
 .Guide-ul,.Guide, .Guide-List>a:hover, .Guide-List, .Guide-List>a:active, .Guide-List>a:visited{
     color:white;
+
+}
+@media only screen and (min-width: 700px) {
+    .Guide{
+        height: 200px;
+    }
+    .Guide-ul{
+        flex-direction: row;
+    }
+
+
+}
+@media only screen and (min-width: 900px){
+.Guide-ul{
+    width: 40%
+}
+}
+@media only screen and (max-width: 699px) {
+    .Guide-ul{
+        flex-direction: column;
+    }
+
 
 }
