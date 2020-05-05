@@ -56,7 +56,7 @@ export default class Networth extends Component {
         return Promise.all([
           this.interval = setTimeout(
             () => this.setState({entries: [res[1]],wallet:res[2], advice: [res[0]]}),
-            2000
+            2400
           )
        
         ])}
@@ -168,7 +168,7 @@ export default class Networth extends Component {
       <h1>Your personalized financial planning dashboard:</h1>
       <div className='profile'>
         <div className="wallet">
-        <h2>Wallet: </h2>
+        <h2>Portfolio: </h2>
         </div>
         <br/>
         <div className="test">
@@ -226,9 +226,11 @@ export default class Networth extends Component {
     </ApiContext.Provider>
   );
   }
-  return (<> 
-  <p>Prepping our financial planning tools</p>
-  </>)
+  return (<div className='loadingpage'> 
+  <br/>
+    <p>Prepping our financial planning tools...</p>
+    <div className="loader"></div>
+    </div>)
   }
 
 }

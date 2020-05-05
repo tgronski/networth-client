@@ -36,6 +36,24 @@
     fill: #738683;
     stroke: #fff;
 }
+.loader{
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #738683;
+    width: 80px;
+    height:80px;
+    margin-left: auto;
+    margin-right: auto;
+    animation: spin 2s linear infinite;
+}
+.loadingpage{
+    color:  #152950;
+    font-size: 20px;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
 .Asset{
     background-color: #738683;
     width: 17px;

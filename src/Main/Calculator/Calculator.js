@@ -63,7 +63,7 @@ export default class Calculator extends Component {
   let wallets = this.state.wallet
   if (wallets.length>0){
   return (<div className="Calculator">
-          <form >
+          <form className="CalculatorForm">
           {wallets
           ? (<div >{wallets.map(wallet =>
             < div key={wallet.id}>  
@@ -79,12 +79,14 @@ export default class Calculator extends Component {
           
           <br/>
           <p><FontAwesomeIcon onMouseEnter={this.handleHelpIcon} onMouseLeave={this.handleHelpIconRemove} className='HelpIcon'icon={faQuestionCircle}/>{' '} Total Net Worth: {this.state.total}</p>
-          {this.state.showDescription
+  
+         
+        </form>
+        {this.state.showDescription
           ? (<i className="description">Networth is the total of your saved assests, minus any debts you are still paying off. Create an account to learn more!</i>)
           : null
           }
-          <p>{this.state.error}</p>
-        </form>
+           <p>{this.state.error}</p>
         </div>
   );
 }
