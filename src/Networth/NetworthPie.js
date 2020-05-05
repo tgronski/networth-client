@@ -23,7 +23,7 @@ export default class NetworthPie extends Component {
     let colors=d3.interpolateRgb("#152950","#738683");
     return (
     <>
-    <p>Portfolio Allocation</p>
+    <p  >Portfolio Allocation</p>
     {total===0
         ?(<div className='report'><br/><i>Add values below to see a breakdown</i></div>)
     :(<div> <svg className='report'>

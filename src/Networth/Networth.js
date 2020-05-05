@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-
 import './Networth.css'
 import NetworthPie from './NetworthPie';
 import GoalsForm from './Goals/GoalsForm'
@@ -107,7 +106,7 @@ export default class Networth extends Component {
     let networth_credits=credit
     let networth_savings=savings
     if(this.state.entries[0] != null && this.state.entries[0].length>=12){
-      this.setState({error: "The maximum historical networth is 12. Please delete some of your past entries.", 
+      this.setState({error: `The maximum historical networth is 12. Please delete some of your past entries below`, 
       total: ''})
     }
     else CalculationApiService.postCalculations(networth_total,networth_total_value , networth_investments, networth_loans, 
@@ -165,20 +164,17 @@ export default class Networth extends Component {
       handleDeleteEntry: this.handleDeleteEntry,
       advice: this.state.advice
     }}> 
-    <div id="Portfolio" className="Networth">
+    <div  className="Networth">
       <Guide/>
-      <h1>Your personalized financial planning dashboard:</h1>
-      <div className='profile'>
-        <div className="wallet">
-        <h2>Portfolio: </h2>
+      <div id="Portfolio" className='profile'>
+        <div  className="wallet">
+        <h2 >Portfolio: </h2>
         </div>
-        <br/>
         <div className="test">
-        <div className="WalletTitle">
+        <div className="WalletTitle" >
           <NetworthPie credit={this.state.CreditCardDebt} loans={this.state.Loans} savings={this.state.Savings} investments={this.state.InvestmentsStocksBonds} otherAssets={this.state.otherAssets} otherDebt={this.state.otherDebt}/>
           </div>
           <form className="WalletEntries">
-          <br/> <br/>
           <div className="WalletForm">
           
           {wallets.length>0
@@ -188,7 +184,7 @@ export default class Networth extends Component {
             <label  htmlFor={wallet.wallet_categories}><FontAwesomeIcon className='icon'  icon={this.icons(wallet.icon)}/>{' '}{wallet.wallet_categories} $: {' '}</label>
             
             <input type='number'  className='input' name={wallet.wallet_categories}  onChange={e=>this.handleNetworth(e)}></input><br/><br/></div>)}
-            <br/>
+           
             </div>)
           :null}
           
@@ -201,17 +197,12 @@ export default class Networth extends Component {
             :(null
             )
           }
-          <div className="WalletTitle">
           <button type="submit" className='submitButton' onClick={e=>this.handleSubmit(e)}>Submit</button>
-          <br/>
-          
-          <br/>
           {this.state.error !=''
           ? (          <p>{this.state.error}</p>)
           : (          <p>Total Net Worth: {this.state.total}</p>
             )}
 
-          </div>
           </div>
         </form>
 
@@ -219,11 +210,12 @@ export default class Networth extends Component {
       </div>
 
 
-    <Resources />
+    
     <div className="chart">
     <Overtime /> 
     {/* <LineChart data={this.state.entries}/> */}
     </div>
+    <Resources />
     <div className='goalsSection'>
     <GoalsForm/>
     </div>
@@ -233,7 +225,7 @@ export default class Networth extends Component {
   }
   return (<div className='loadingpage'> 
   <br/>
-    <p>Prepping our financial planning tools...</p>
+    <p>Prepping your personalized financial planning dashboard...</p>
     <div className="loader"></div>
     </div>)
   }
