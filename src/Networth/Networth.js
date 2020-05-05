@@ -29,7 +29,7 @@ export default class Networth extends Component {
         Savings: 0,
         otherDebt: 0,
         otherAssets: 0,
-        total: '$0.00',
+        total: '',
         entries: [{}],
         networth: false, 
         error: '',
@@ -85,7 +85,7 @@ export default class Networth extends Component {
       value=0
     }
 
-    this.setState({networth: false, [`${name}`]: value})
+    this.setState({networth: false, [`${name}`]: value, total: ''})
   }
 
 
@@ -204,8 +204,11 @@ export default class Networth extends Component {
           <br/>
           
           <br/>
-          <p>Total Net Worth: {this.state.total}</p>
-          <p>{this.state.error}</p>
+          {this.state.error !=''
+          ? (          <p>{this.state.error}</p>)
+          : (          <p>Total Net Worth: {this.state.total}</p>
+            )}
+
           </div>
           </div>
         </form>
