@@ -27,7 +27,7 @@ export default class Goals extends Component{
   return (
 
         <div className='goalsList' >
-          <h3>Saved Goals List:</h3>
+          <h3 className='goalsLabel'>Saved Goals List:</h3>
           {goals[0] != null && goals[0].length>0
           ? (<ul >
 

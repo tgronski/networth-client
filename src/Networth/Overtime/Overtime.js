@@ -37,7 +37,7 @@ export default class Overtime extends Component{
     {entries != null && entries.length>0
     ? (<div className="Overtime-list">
        {(entries.map(entry=>{
-        return <p style={{color: `${entry.color}`}} key={entry.id}>{entry.date_created.slice(0,10)}: {' '}{entry.networth_total}{' '}
+        return <p style={{color: `${entry.color}`}} key={entry.id}>{entry.date_created.slice(5,7)}/{entry.date_created.slice(0,4)}: {' '}{entry.networth_total}{' '}
      
      <button id={entry.id} className='deleteButton'  onClick={this.handleClickDelete}>Delete</button></p>
      }))}

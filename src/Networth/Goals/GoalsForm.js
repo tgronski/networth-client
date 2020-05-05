@@ -110,7 +110,7 @@ export default class GoalsForm extends Component{
 
         <div className='GoalsForm'>
          
-        <h3>Save New Goals:</h3>
+        <h3 className='goalsLabel'>Save New Goals:</h3>
         <form
          
         onSubmit={(e)=>this.handleSubmitGoals(e)}

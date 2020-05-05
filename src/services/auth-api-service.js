@@ -17,6 +17,7 @@ const AuthApiService = {
           : res.json()
       )
   },
+
   postLogin({ user_name, password }) {
     return fetch(`${config.API_ENDPOINT}/api/auth/login`, {
       method: 'POST',
@@ -72,7 +73,7 @@ const AuthApiService = {
     .catch(err => {
       console.log('refresh token request error')
       console.error(err)
-      
+
     })
 },
 

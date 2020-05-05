@@ -56,7 +56,7 @@ export default class GoalsWheel extends Component{
   return (
 
     <div className='wheel'>
-    <h3>Percent to All Goals:</h3>
+    <h3 className='goalsLabel'>Percent to All Goals:</h3>
     <svg className='report'>
     
                 <g  transform={`translate(${width/2},${height/2})`}>

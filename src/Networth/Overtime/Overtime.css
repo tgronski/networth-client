@@ -4,7 +4,7 @@
     margin-right: auto;
     background-color: white;
     overflow: scroll;
-    border: gray solid 3px;
+    border:  #152950 solid 3px;
     border-radius: 15px;
     max-height: 160px;
 }
