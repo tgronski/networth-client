@@ -51,7 +51,7 @@ export default class GoalsWheel extends Component{
       .innerRadius(70)
       .outerRadius(100)
       
-      let colors=d3.interpolateRgb("#738683","#D3D3D3");
+      let colors=d3.interpolateRgb("#738683","#eeee");
   
   return (
 
