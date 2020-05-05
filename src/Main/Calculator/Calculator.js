@@ -12,11 +12,11 @@ export default class Calculator extends Component {
   constructor(props){
     super(props);
     this.state={
-      CreditCardDebt: 0,
-      InvestmentsStocksBonds: 0,
+      CreditCard: 0,
+      Investments: 0,
       Loans: 0,
       Savings: 0,
-      total: '$0.00',
+      total: '',
       showDescription: false,
       wallet:[{id:1, categories: 'Credit Card', icons: faCreditCard},
       {id:2, categories: 'Investments', icons:  faLandmark},
@@ -33,7 +33,7 @@ export default class Calculator extends Component {
     if(value===''){
       value=0
     }
-    this.setState({[`${name}`]: value})
+    this.setState({[`${name}`]: value,total: ''})
   }
   handleHelpIcon=()=>{
     if(this.state.showDescription===false){
@@ -49,8 +49,8 @@ export default class Calculator extends Component {
     e.preventDefault();
     let options = { style: 'currency', currency: 'USD' };
     let numberFormat = new Intl.NumberFormat('en-US', options);
-    let credit=parseFloat(this.state.CreditCardDebt)
-    let investments=parseFloat(this.state.InvestmentsStocksBonds)
+    let credit=parseFloat(this.state.CreditCard)
+    let investments=parseFloat(this.state.Investments)
     let savings = parseFloat(this.state.Savings)
     let loans = parseFloat(this.state.Loans)
     let total=investments  - credit  + savings - loans 

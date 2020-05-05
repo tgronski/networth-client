@@ -34,7 +34,7 @@ export default class Resources extends Component{
       </ul>)
       : null
     )}
-      {(updatednetworth.networth_total_value>0
+      {(updatednetworth.networth_total_value>=0
       ?(<ul className="list" id='assetList'> <h2>Financial Planning Resources:</h2> 
       
            <li key={assets.id}>We see that you are saving money, which is great! You may want to consider <br/>an investment account like {assets.content} to continue saving. </li>
