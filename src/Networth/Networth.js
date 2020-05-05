@@ -12,6 +12,7 @@ import { faCoffee, faCreditCard, faLandmark, faHandHoldingUsd, faPiggyBank, faMo
 import AdviceApiService from '../services/advice-service'
 import CalculationApiService from "../services/calculations-service"
 import WalletsApiService from '../services/wallet-service'
+import Guide from "./Guide/Guide"
 import { library } from "@fortawesome/fontawesome-svg-core";
 
 library.add( faCoffee,
@@ -164,7 +165,8 @@ export default class Networth extends Component {
       handleDeleteEntry: this.handleDeleteEntry,
       advice: this.state.advice
     }}> 
-    <div className="Networth">
+    <div id="Portfolio" className="Networth">
+      <Guide/>
       <h1>Your personalized financial planning dashboard:</h1>
       <div className='profile'>
         <div className="wallet">

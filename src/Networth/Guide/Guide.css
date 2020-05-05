@@ -1,0 +1,14 @@
+.Guide{
+    height: 100px; 
+    width: 50px;
+    position: fixed;
+    left: 5px;
+    color: #152950;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.Guide-List>a:hover, .Guide-List>a:active, .Guide-List>a:visited{
+    color: #152950;
+
+}

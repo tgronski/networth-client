@@ -18,7 +18,7 @@ export default class Resources extends Component{
       updatednetworth = this.context.entries[0][length-1]
     }
   return (
-    <div className="Resources">
+    <div id='Advice' className="Resources">
       {length===0
       ?(<div> 
         <h2>Financial Planning Resources:</h2> 

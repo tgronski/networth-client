@@ -28,7 +28,7 @@ export default class Overtime extends Component{
     }
     
   return (
-    <div className="Overtime">
+    <div id="Overtime" className="Overtime">
     {this.context.entries.length>0
       ?(<h2>Your Networth Over Time:</h2>)
       : null

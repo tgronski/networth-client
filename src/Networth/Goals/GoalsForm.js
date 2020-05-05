@@ -100,7 +100,7 @@ export default class GoalsForm extends Component{
         handleDeleteGoal: this.handleDeleteGoal,
         entries: this.context.entries
       }}>
-        <div>
+        <div id='GoalsForm'>
         <br/>
         <br/>
         <h2 className="sectionTitle">Your Financial Goals:</h2>
