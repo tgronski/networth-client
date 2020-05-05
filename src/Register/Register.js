@@ -77,7 +77,7 @@ export default class Register extends Component{
         </div>
         <div className='password'>
           <label htmlFor='RegistrationForm__password'>
-            Password: {' '} 
+            Password*: {' '} 
           </label>
           <input
             autoComplete='newpassword'
@@ -86,6 +86,10 @@ export default class Register extends Component{
             required
             id='RegistrationForm__password'>
           </input>
+          <label htmlFor='RegistrationForm__passwordnotes' className='RegistrationForm__notes'>
+            <br/>
+           *Password must have at least 1 upper case letter, 1 lower case letter, 1 number, and 1 special character.
+          </label>
         </div>
         <div className='nick_name'>
           <label htmlFor='RegistrationForm__nick_name'>

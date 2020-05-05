@@ -6,4 +6,6 @@
     flex-direction: column;
    
 }
-
+.RegistrationForm__notes{
+    font-size: 10px;
+}
