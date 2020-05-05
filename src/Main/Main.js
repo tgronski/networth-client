@@ -9,8 +9,6 @@ export default class Main extends Component {
   render() {
   return (
     <div className="Main">
-  
-  <p className='preview'>Try out the net-worth-calculator:</p>
         <Calculator/>
         <br/>
         <br/>
