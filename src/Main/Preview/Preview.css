@@ -23,7 +23,7 @@ g{
     margin-top: -100px;
 }
 
-.mainLink:active, .mainLink:visited{
+.mainLink>a:active, .mainLink>a:visited, .mainLink>a:hover,.mainLink{
 color: #738683;
 }
 .pieChart{
