@@ -2,16 +2,18 @@ import React,{Component} from 'react';
 import './Nav.css'
 import { Link } from "react-router-dom";
 import Menu from './Menu'
+import Header from './Header'
+import TokenService from '../services/token-service';
 
 
-export default class Nav extends Component {
+export default class Nav extends Component{
+  
 
-
-  render(){
+render(){
   return (
     <div className="Nav">
      <div id="topLeftNav">
-        {/* <Header/> */}
+     {/* <Header /> */}
         </div>
         
         <div id='topRightNav'>
@@ -20,6 +22,6 @@ export default class Nav extends Component {
         <div id='mainTitle'><Link to='/'>Fisave</Link></div>
     </div>
   );
-}
-}
 
+}
+}

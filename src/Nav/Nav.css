@@ -52,3 +52,7 @@ color: white
 .Menu{
     width: 50px;
 }
+.header{
+    top: 10px;
+    right: 5px
+}

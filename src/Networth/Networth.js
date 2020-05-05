@@ -8,7 +8,6 @@ import Overtime from "./Overtime"
 import Resources from './Resources/Resources'
 import ApiContext from './ApiContext'
 // import LineChart from './LineChart'
-import Header from './Header'
 import { faCoffee, faCreditCard, faLandmark, faHandHoldingUsd, faPiggyBank, faMoneyBillAlt, faMoneyCheck, faQuestionCircle} from "@fortawesome/free-solid-svg-icons";
 import AdviceApiService from '../services/advice-service'
 import CalculationApiService from "../services/calculations-service"
@@ -167,10 +166,7 @@ export default class Networth extends Component {
       advice: this.state.advice
     }}> 
     <div className="Networth">
-      <Header/>
       <h1>Your personalized financial planning dashboard:</h1>
-      <div className='Header__logged-in'>
-      </div>
       <div className='profile'>
         <div className="wallet">
         <h2>Wallet: </h2>
@@ -229,7 +225,6 @@ export default class Networth extends Component {
   );
   }
   return (<> 
-  <Header/>
   <p>Prepping our financial planning tools</p>
   </>)
   }
