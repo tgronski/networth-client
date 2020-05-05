@@ -22,7 +22,7 @@ export default class Register extends Component{
     const { full_name, nick_name, user_name, password } = ev.target
      this.setState({ error: null })
      AuthApiService.postUser({
-       user_name: user_name.value,
+       user_name: (user_name.value).toLowerCase(),
        password: password.value,
        full_name: full_name.value,
        nickname: nick_name.value,

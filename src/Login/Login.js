@@ -33,9 +33,10 @@ export default class Login extends Component{
         ev.preventDefault()
         this.setState({ error: null })
     const { user_name, password } = ev.target
-    
+    // let user_name = (ev.target.user_name.value).toLowerCase()
+
     AuthApiService.postLogin({
-      user_name: user_name.value,
+      user_name: (user_name.value).toLowerCase(),
       password: password.value,
 
     })
