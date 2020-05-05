@@ -23,6 +23,7 @@ export default class Goals extends Component{
       networth= Number(networth.replace(/[^0-9.-]+/g,""))
 
       }
+
   return (
 
         <div className='goalsList' >
@@ -34,10 +35,17 @@ export default class Goals extends Component{
               
               <li  className="goalsListItem" key={goal.id}>{goal.goal_name}:{' '}{numberFormat.format(goal.goal_value)} 
               <br/>
-              Percent to Goal: {' '}
-              {networth<goal.goal_value
+              Percent to Goal: {' '} 
+              {networth<goal.goal_value && networth>=0
               ?(`${((networth/parseFloat(goal.goal_value))*100).toFixed(2)}%`)
-              : "100%"}{' '}
+              : null}
+              {networth<0
+              ?(`0%`)
+              : null}
+              {networth>goal.goal_value || networth===goal.goal_value
+              ?(`$100%`)
+              : null}
+              
               <button id={goal.id} className='deleteButton' onClick={e=>this.context.handleDeleteGoal(e)}>Delete</button></li>
                ))}
             </ul>)

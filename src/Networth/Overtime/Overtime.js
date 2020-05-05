@@ -47,7 +47,7 @@ export default class Overtime extends Component{
      {entries != null && entries.length>1
      ?(<p>Over your two most recent entries, your net worth has changed by {numberFormat.format(entries[entries.length-1].networth_total_value-entries[entries.length-2].networth_total_value)}</p>)
      :null}
-    
+    <br/><br/>
     </div>
   )
 }
