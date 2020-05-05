@@ -18,7 +18,10 @@
     padding: 0;
 }
 
-
+.WalletTitle{
+    margin-left: 5%;
+    margin-top: -8%
+}
 .KeyMenu{
     font-size: 18px;
 }
@@ -62,14 +65,11 @@
     margin-right: auto;
     width: 80%;
     border: solid black 3px;
+    border-radius: 15px;
     font-size: 22px;
     text-decoration: center;
 }
-.Overtime-list{
-    max-height: 160px;
-    overflow: scroll;
-    border: gray solid 3px;
-}
+
 .List{
     list-style-type: none;
 }
@@ -84,6 +84,7 @@
     height: 200px;
     max-width: 200px;
     font-size: 16px;
+
 }
 
 .lineChartSvg{
@@ -129,7 +130,8 @@
 
 .WalletEntries{
     text-align: left;
-    display:flex
+    display:flex;
+    
 }
 .WalletTitle{
     text-align: center;
@@ -139,6 +141,8 @@
     flex-direction: column;
     margin-left: 5px;
 }
+
+
 
 @media only screen and (min-width: 900px) {
     .chart{
@@ -155,6 +159,9 @@
     display: flex;
   
     margin: 10%
+    }
+    .profile{
+        width: 70%;
     }
 
 }

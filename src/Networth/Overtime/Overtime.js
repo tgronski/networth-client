@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
-import ApiContext from './ApiContext'
-import CalculationApiService from '../services/calculations-service';
-
+import ApiContext from '../ApiContext'
+import CalculationApiService from '../../services/calculations-service';
+import './Overtime.css'
 
 export default class Overtime extends Component{  
   static contextType = ApiContext;
@@ -37,9 +37,9 @@ export default class Overtime extends Component{
     {entries != null && entries.length>0
     ? (<div className="Overtime-list">
        {(entries.map(entry=>{
-        return <p style={{color: `${entry.color}`}} key={entry.id}>{entry.date_created.slice(0,10)}: {' '}{entry.networth_total}
+        return <p style={{color: `${entry.color}`}} key={entry.id}>{entry.date_created.slice(0,10)}: {' '}{entry.networth_total}{' '}
      
-     <button id={entry.id} onClick={this.handleClickDelete}>Delete</button></p>
+     <button id={entry.id} className='deleteButton'  onClick={this.handleClickDelete}>Delete</button></p>
      }))}
      </div>)
      : <i>Add your personal finance information to track your networth over time</i>

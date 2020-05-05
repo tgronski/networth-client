@@ -30,8 +30,14 @@ export default class GoalsWheel extends Component{
   }
   
   let data= [0]
-  if(sumGoals>0 && networth<sumGoals){
+  if(sumGoals>0 && networth<0){
+    data= [0,100]
+  }
+  else if(sumGoals>0 && networth<sumGoals){
       data = [networth/parseFloat(sumGoals)*100,100-(networth/parseFloat(sumGoals)*100)]
+  }
+  else if(sumGoals>0 && networth===sumGoals){
+    data = [100,0]
   }
 
   else if (sumGoals>0 && networth>sumGoals){

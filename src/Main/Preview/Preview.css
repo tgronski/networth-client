@@ -1,18 +1,16 @@
 .Preview{
-    background: gray;
+    background:#eeee;
     height: 200px;
     padding: 5%;
     display: flex;
     justify-content: space-evenly;
-    color: white;
+    color: #152950;
     
 }
 
 
 .Preview>h1{
     font-size: 40px;
-    
-   
 }
 .Preview-text{
     display: block
@@ -26,7 +24,7 @@ g{
 }
 
 .mainLink:active, .mainLink:visited{
-color: #152950;
+color: #738683;
 }
 .pieChart{
     margin: 100px

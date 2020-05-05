@@ -28,22 +28,23 @@ export default class Resources extends Component{
       :null
       }
       {(updatednetworth.networth_total_value<0
-      ?(<ul className="list" id='debtList'>
-           <li key={debts.id}>We see that you are working on paying off some loans, great work! You may want to check out money saving sites like: {debts.content}</li>
+      ?(<ul className="list" id='debtList'> <h2>Financial Planning Resources:</h2> 
+           <li key={debts.id}>We see that you are working on paying off some debt, great work! You may want to check out <br/> money saving sites like: {debts.content}</li>
+           <br/>
       </ul>)
       : null
     )}
       {(updatednetworth.networth_total_value>0
-      ?(<ul className="list" id='assetList'>
+      ?(<ul className="list" id='assetList'> <h2>Financial Planning Resources:</h2> 
       
-           <li key={assets.id}>We see that you are saving money, which is great! You may want to consider an investment account like {assets.content} to continue saving. </li>
-            
+           <li key={assets.id}>We see that you are saving money, which is great! You may want to consider <br/>an investment account like {assets.content} to continue saving. </li>
+           <br/>
             </ul>)
       : null
     )}
 
 
-
+<br/><br/>
 
     </div>
   )

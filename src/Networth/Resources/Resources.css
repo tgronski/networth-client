@@ -9,12 +9,13 @@
     align-content: center;
     flex-direction: column;
     justify-content: space-evenly;
-    max-height: 200px;
-    max-width:700px;
+    height: 100px;
+    width: 100%;
+    padding-left: 0;
+    margin-top: 50px;
     list-style-type: none;
-    border: solid rgba(0, 0, 0, 0.557) 2px;
-    padding: 20px;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: ghostwhite;
+}
+.Resources{
+    width: 100%;
+    padding-bottom: 5px
 }

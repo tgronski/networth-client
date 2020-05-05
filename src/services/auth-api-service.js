@@ -72,6 +72,7 @@ const AuthApiService = {
     .catch(err => {
       console.log('refresh token request error')
       console.error(err)
+      
     })
 },
 

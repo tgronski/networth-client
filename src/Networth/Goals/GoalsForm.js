@@ -101,6 +101,8 @@ export default class GoalsForm extends Component{
         entries: this.context.entries
       }}>
         <div>
+        <br/>
+        <br/>
         <h2 className="sectionTitle">Your Financial Goals:</h2>
         
         <div className='Goals'>
@@ -155,11 +157,13 @@ export default class GoalsForm extends Component{
         </div>
         </form>
         </div>
-        
+      
         <Goals/>
         <GoalsWheel/>
         </div>
         </div>
+        <br/>
+        <br/>
         </ApiContext.Provider>
     )
 }

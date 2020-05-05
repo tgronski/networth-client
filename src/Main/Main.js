@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import Calculator from '../Calculator/Calculator';
-import Preview from '../Preview/Preview';
+import Calculator from './Calculator/Calculator';
+import Preview from './Preview/Preview';
 import '../App.css';
-import Testamonials from '../Testamonials/Testamonials';
+import Testamonials from './Testamonials/Testamonials';
 
 export default class Main extends Component {
 
@@ -12,7 +12,6 @@ export default class Main extends Component {
   
   <p className='preview'>Try out the net-worth-calculator:</p>
         <Calculator/>
-        <br/>
         <br/>
         <br/>
         <Preview/>

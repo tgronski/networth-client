@@ -37,8 +37,8 @@ export default class Goals extends Component{
               Percent to Goal: {' '}
               {networth<goal.goal_value
               ?(`${((networth/parseFloat(goal.goal_value))*100).toFixed(2)}%`)
-              : "100%"}
-              <button id={goal.id} onClick={e=>this.context.handleDeleteGoal(e)}>Delete</button></li>
+              : "100%"}{' '}
+              <button id={goal.id} className='deleteButton' onClick={e=>this.context.handleDeleteGoal(e)}>Delete</button></li>
                ))}
             </ul>)
           

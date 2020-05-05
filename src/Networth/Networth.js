@@ -4,7 +4,7 @@ import './Networth.css'
 import NetworthPie from './NetworthPie';
 import GoalsForm from './Goals/GoalsForm'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Overtime from "./Overtime"
+import Overtime from "./Overtime/Overtime"
 import Resources from './Resources/Resources'
 import ApiContext from './ApiContext'
 // import LineChart from './LineChart'
@@ -13,7 +13,6 @@ import AdviceApiService from '../services/advice-service'
 import CalculationApiService from "../services/calculations-service"
 import WalletsApiService from '../services/wallet-service'
 import { library } from "@fortawesome/fontawesome-svg-core";
-import TokenService from '../services/token-service';
 
 library.add( faCoffee,
   faCreditCard, faLandmark, faHandHoldingUsd, faPiggyBank, faMoneyBillAlt, faMoneyCheck, faQuestionCircle)
@@ -157,7 +156,7 @@ export default class Networth extends Component {
 // max inputs is 9 digits
 
   render(){
-    let wallets = this.state.wallet
+  let wallets = this.state.wallet
   if (wallets.length>0){
   return (
     <ApiContext.Provider value={{
@@ -185,7 +184,8 @@ export default class Networth extends Component {
             < div key={wallet.id}>
             
             <label  htmlFor={wallet.wallet_categories}><FontAwesomeIcon className='icon'  icon={this.icons(wallet.icon)}/>{' '}{wallet.wallet_categories} $: {' '}</label>
-            <input type='number'  className='input' name={wallet.wallet_categories}  onChange={e=>this.handleNetworth(e)}></input></div>)}
+            
+            <input type='number'  className='input' name={wallet.wallet_categories}  onChange={e=>this.handleNetworth(e)}></input><br/><br/></div>)}
             <br/>
             </div>)
           :null}
@@ -219,7 +219,9 @@ export default class Networth extends Component {
     <Overtime /> 
     {/* <LineChart data={this.state.entries}/> */}
     </div>
+    <div className='goalsSection'>
     <GoalsForm/>
+    </div>
     </div>
     </ApiContext.Provider>
   );

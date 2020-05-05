@@ -47,7 +47,7 @@ export default class Menu extends Component{
             ?( <ul  id='nav-leader' onClick={this.handleUnDrop}>
                     {data.map(data=>(
                     <li key={data.id}  ><Link className='menuLink' to={data.path}><h3>{data.name}</h3></Link></li> ))}
-                    <li className='Header__logged-in'><Link className='menuLink' onClick={this.handleLogoutClick} to='/'>  Logout </Link></li>
+                    <li className='Header__logged-in'><Link className='menuLink' onClick={this.handleLogoutClick} to='/'> <h3>Logout</h3>  </Link></li>
                
                 </ul>
             )
