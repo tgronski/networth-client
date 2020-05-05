@@ -10,7 +10,7 @@ export default class Guide extends Component{
 
   return (
     <div className="Guide">
-        <b>Guide:</b>
+        <b>Contents:</b>
         <ul > 
         <li className="Guide-List"><Link to ='#Portfolio'><b>Portfolio</b></Link></li>
 
