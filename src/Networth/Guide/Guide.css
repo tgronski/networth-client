@@ -21,7 +21,7 @@ display: flex;
 justify-content: space-evenly;
 }
 
-.Guide-ul,.Guide, .Guide-List>a:hover, .Guide-List, .Guide-List>a:active, .Guide-List>a:visited{
+.Guide-ul>a,.Guide, .Guide-List>a:hover, .Guide-List>a, .Guide-List>a:active, .Guide-List>a:visited{
     color:white;
 
 }
