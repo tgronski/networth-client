@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
 import './Networth.css'
-import NetworthPie from './NetworthPie';
+import NetworthPie from './PieChart/NetworthPie';
 import GoalsForm from './Goals/GoalsForm'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Overtime from "./Overtime/Overtime"
 import Resources from './Resources/Resources'
 import ApiContext from './ApiContext'
-// import LineChart from './LineChart'
 import { faCoffee, faCreditCard, faLandmark, faHandHoldingUsd, faPiggyBank, faMoneyBillAlt, faMoneyCheck, faQuestionCircle} from "@fortawesome/free-solid-svg-icons";
 import AdviceApiService from '../services/advice-service'
 import CalculationApiService from "../services/calculations-service"
@@ -153,7 +152,6 @@ export default class Networth extends Component {
       return  faMoneyBillAlt
     }
   }
-// max inputs is 9 digits
 
   render(){
   let wallets = this.state.wallet
@@ -213,7 +211,6 @@ export default class Networth extends Component {
     
     <div className="chart">
     <Overtime /> 
-    {/* <LineChart data={this.state.entries}/> */}
     </div>
     <Resources />
     <div className='goalsSection'>

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './Networth.css'
+import '../Networth.css'
 import * as d3 from "d3";
 import Key from './Key'
 
