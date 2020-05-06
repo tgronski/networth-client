@@ -15,11 +15,11 @@ export default class Guide extends Component{
         <div className="Guide-title"><h3>Dashboard Contents:</h3></div>
         <ul className="Guide-ul"> 
         <li className="Guide-List"><Link to ='#Portfolio'><b>Portfolio</b></Link></li>
-        <li><b>|</b></li>
+        <li className='spacing'><b>|</b></li>
+            <li className="Guide-List"><Link to ="#Overtime"><b>Historical Data</b></Link></li>
+        <li className='spacing'><b>|</b></li>
             <li className="Guide-List"><Link to ='#Advice'><b>Advice</b></Link></li>
-            <li><b>|</b></li>
-            <li className="Guide-List"><Link to ="#Overtime"><b>Networth Overtime</b></Link></li>
-            <li><b>|</b></li>
+            <li className='spacing'><b>|</b></li>
             <li className="Guide-List"><Link to ='#GoalsForm'><b>Goals</b></Link></li>
         </ul>
     </div>

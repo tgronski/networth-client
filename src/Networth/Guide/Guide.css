@@ -20,7 +20,9 @@ display: flex;
 
 justify-content: space-evenly;
 }
-
+.spacing{
+    display: none;
+}
 .Guide-ul>a,.Guide, .Guide-List>a:hover, .Guide-List>a, .Guide-List>a:active, .Guide-List>a:visited{
     color:white;
 
@@ -32,7 +34,9 @@ justify-content: space-evenly;
     .Guide-ul{
         flex-direction: row;
     }
-
+    .spacing{
+        display: inline;
+    }
 
 }
 @media only screen and (min-width: 900px){
