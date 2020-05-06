@@ -45,7 +45,7 @@
     margin: 0;
     z-index: 2;
 }
-.menuLink:visited, .menuLink:active{
+.menuLink,.menuLink:visited, .menuLink:active, .menuLink:hover{
 color: white 
 }
 
