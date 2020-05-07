@@ -62,7 +62,7 @@ export default class Calculator extends Component {
   render(){
   let wallets = this.state.wallet
   if (wallets.length>0){
-  return (<div className="Calculator" 
+  return (<div className="Calculator" >
     <div className='background'>
           <form className="CalculatorForm">
           <p className='preview'>Try out the net-worth-calculator:</p>
