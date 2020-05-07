@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCoffee, faCreditCard, faLandmark, faHandHoldingUsd, faPiggyBank, faQuestionCircle} from "@fortawesome/free-solid-svg-icons";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import './Calculator.css'
-import Background from '../Background.png'
 library.add( faCoffee,
   faCreditCard, faLandmark, faHandHoldingUsd, faPiggyBank,faQuestionCircle)
 
@@ -63,7 +62,7 @@ export default class Calculator extends Component {
   render(){
   let wallets = this.state.wallet
   if (wallets.length>0){
-  return (<div className="Calculator" style={{ backgroundImage: `url(${Background})`}}>
+  return (<div className="Calculator" 
     <div className='background'>
           <form className="CalculatorForm">
           <p className='preview'>Try out the net-worth-calculator:</p>
