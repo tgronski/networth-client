@@ -111,7 +111,7 @@ export default class GoalsForm extends Component{
         <div className='GoalsForm'>
          
         <h3 className='goalsLabel'>Save New Goals:</h3>
-        <form
+        <form className='Gaols-form'
          
         onSubmit={(e)=>this.handleSubmitGoals(e)}
         >
@@ -122,8 +122,7 @@ export default class GoalsForm extends Component{
         <input
         required
         name='goal_name'
-        maxLength="36"
-        size="29"
+        size="30"
         value={this.state.goal_name } 
         onChange={e=>this.handleGoal(e)}
         id='GoalsForm__goal_title'>

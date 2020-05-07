@@ -80,12 +80,13 @@ export default class App extends Component {
   renderMainRoutes() {
     return(<Switch>
       <Route  exact path="/about" component={About}/>
+      <PrivateRoute exact path='/networth' component={Networth}/>
+      <PrivateRoute exact path='/' component={Networth}/>
       <PublicOnlyRoute  exact path="/main" component={Main}/>
       <PublicOnlyRoute  exact path="/" component={Main}/>
       <PublicOnlyRoute exact path='/register' component={Register}/>
       <PublicOnlyRoute exact path='/login' component={Login}/>
-      <PrivateRoute exact path='/networth' component={Networth}/>
-      <PrivateRoute exact path='/' component={Networth}/>
+      <PublicOnlyRoute component={Main}/>
     </Switch>)
   }
   render() {

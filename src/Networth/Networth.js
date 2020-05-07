@@ -71,7 +71,7 @@ export default class Networth extends Component {
   handleDeleteEntry=()=>{
     CalculationApiService.getCalculations()
     .then(res=>
-      this.setState({entries: [res],error: ''})  
+      this.setState({entries: [res],error: '', total: ''})  
     )
    
 
@@ -108,11 +108,9 @@ export default class Networth extends Component {
       this.setState({error: `The maximum historical networth is 12. Please delete some of your past entries below`, 
       total: ''})
     }
-    else CalculationApiService.postCalculations(networth_total,networth_total_value , networth_investments, networth_loans, 
+    else (this.setState({total: total}))
+      CalculationApiService.postCalculations(networth_total,networth_total_value , networth_investments, networth_loans, 
     networth_credits, networth_savings) 
-    .then(res=>{
-      this.setState({total: total})
-    })   
     .catch(res=>{
       this.setState({error: res.error})
     })
@@ -181,7 +179,7 @@ export default class Networth extends Component {
             
             <label  htmlFor={wallet.wallet_categories}><FontAwesomeIcon className='icon'  icon={this.icons(wallet.icon)}/>{' '}{wallet.wallet_categories} $: {' '}</label>
             
-            <input type='number'  className='input' name={wallet.wallet_categories}  onChange={e=>this.handleNetworth(e)}></input><br/><br/></div>)}
+            <input type='number' size='50' className='input' name={wallet.wallet_categories}  onChange={e=>this.handleNetworth(e)}></input><br/><br/></div>)}
            
             </div>)
           :null}

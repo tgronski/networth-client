@@ -30,7 +30,7 @@ export default class Overtime extends Component{
   return (
     <div id="Overtime" className="Overtime">
     {this.context.entries.length>0
-      ?(<h2>Your Networth Over Time:</h2>)
+      ?(<h2 className='Overtime-title'>Historical Networth Data:</h2>)
       : null
     }
    
