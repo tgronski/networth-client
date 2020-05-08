@@ -31,7 +31,7 @@ Create an account or log in to access more features & save your data.
 
 Once logged in, fill out the networth form, access previous networth calculations, get advice, or add goals. 
 
-![account](Fisave-dashoard.png)
+![account](Fisave-dashboard.png)
 
 When you add a goal, you will get a % to goal. It will be calculated using your most recent networth value. 
 
