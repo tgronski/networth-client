@@ -22,18 +22,29 @@ export default class Calculator extends Component {
       {id:2, categories: 'Investments', icons:  faLandmark},
       {id:3, categories: 'Loans', icons:  faHandHoldingUsd},
       {id:4, categories: 'Savings', icons:  faPiggyBank}
-      ]
+      ],
+      CreditCard_disabled:false,
+      Investments_disabled:false,
+      Loans_disabled:false,
+      Savings_disabled:false
+
     }
   }
 
   handleNetworth=(e)=>{
     e.preventDefault();
     let name= (e.target.name).replace(/[\s()/]/g,'')
-    let value=(e.target.value).replace(/[^0-9.-]+/g,'')
-    if(value===''){
+    let value=(e.target.value)
+    console.log(value)
+    if(value<0 || value.includes('-')){
+      this.setState({error: 'No negative values',[`${name}_disabled`]: true})
+    }
+    else if(value===''){
       value=0
     }
-    this.setState({[`${name}`]: value,total: ''})
+    if(value>=0){
+      this.setState({[`${name}`]: value,total: '',[`${name}_disabled`]: false})
+    }
   }
   handleHelpIcon=()=>{
     if(this.state.showDescription===false){
@@ -76,10 +87,15 @@ export default class Calculator extends Component {
             </div>)
           :null}
           <br/>
-          <button type="submit" className='submitButton' onClick={e=>this.handleSubmit(e)}>Submit</button>
-          <br/>
+          {this.state.CreditCard_disabled===false &&
+          this.state.Investments_disabled===false &&
+          this.state.Loans_disabled===false &&
+          this.state.Savings_disabled===false
+            ?(<button type="submit" className='submitButton' onClick={e=>this.handleSubmit(e)}>Submit</button>
+            )
+            : <span><p  className='disabled_submitButton' >Submit</p><p>{this.state.error}</p></span>
+          }
           
-          <br/>
           <p><FontAwesomeIcon onMouseEnter={this.handleHelpIcon} onMouseLeave={this.handleHelpIconRemove} className='HelpIcon'icon={faQuestionCircle}/>{' '} Total Net Worth: {this.state.total}</p>
   
          
@@ -88,7 +104,6 @@ export default class Calculator extends Component {
           ? (<i className="description">Networth is the total of your saved assests, minus any debts you are still paying off. Create an account to learn more!</i>)
           : null
           }
-           <p>{this.state.error}</p>
            </div>
         </div>
   );
