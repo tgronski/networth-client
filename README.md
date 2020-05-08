@@ -3,10 +3,10 @@ Fisave
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-###Summary: 
+### Summary: 
 Fisave is a full stack web app for helping people track their networth over time. 
 
-###Technologies Used: 
+### Technologies Used: 
 Front-end: 
 React 
 Javascript
@@ -18,7 +18,7 @@ Node
 Express
 PostgreSQL
 
-###Sample Login Credentials: 
+### Sample Login Credentials: 
 user name: TestLogin
 password: TestLogin1!
 
