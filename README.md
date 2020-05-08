@@ -19,4 +19,7 @@ Express
 PostgreSQL
 
 
+Use the homepage as a trial of the service before committing to a log in. 
+Fill in any of the options on the form & click submit to see what your current networth is. 
 ![homepage](Fisave-homepage.png)
+Create an account or log in to access more features & save your data. 
