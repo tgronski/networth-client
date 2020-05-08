@@ -124,12 +124,22 @@ export default class Networth extends Component {
       total_disabled:true,
       total: ''})
     }
-    else (CalculationApiService.postCalculations(networth_total,networth_total_value , networth_investments, networth_loans, 
-    networth_credits, networth_savings) 
-    .then(res=>this.setState({total: total})))
+    else Promise.all([(CalculationApiService.postCalculations(networth_total,networth_total_value , networth_investments, networth_loans, 
+    networth_credits, networth_savings))])
+    .then(this.setState({add_loader:true}))
+    .then(res=>{
+      return Promise.all([
+        setTimeout(
+          () => this.setState({add_loader:false, total: total}),
+          1000
+        )
+     
+      ])
+    })  
     .catch(res=>{
-      this.setState({error: res.error})
-    })
+    this.setState({error: res.error})
+  })
+
   }
   componentDidUpdate(){ 
     this._mounted = true
@@ -218,10 +228,13 @@ export default class Networth extends Component {
             ?(<button type="submit" className='submitButton' onClick={e=>this.handleSubmit(e)}>Submit</button>
             )
             : <span><p  className='disabled_submitButton' >Submit</p></span>
-          }          
+          }
+          {this.state.add_loader
+          ? <div className="small-loader"></div>
+          : <p>Total Net Worth: {this.state.total}</p>}          
           {this.state.error !==''
           ? (          <p>{this.state.error}</p>)
-          : (          <p>Total Net Worth: {this.state.total}</p>
+          : (          null
             )}
 
           </div>

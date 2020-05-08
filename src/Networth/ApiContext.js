@@ -5,5 +5,6 @@ export default React.createContext({
   handleDeleteEntry:()=>{},
   goals: [{}], 
   handleDeleteGoal: ()=>{},
-  advice:[{}]
+  advice:[{}],
+  delete_loader: Boolean
 })

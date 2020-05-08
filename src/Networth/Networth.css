@@ -46,6 +46,16 @@
     margin-right: auto;
     animation: spin 2s linear infinite;
 }
+.small-loader{
+    border: 8px solid #f3f3f3;
+    border-radius: 180%;
+    border-top: 8px solid #738683;
+    width: 10px;
+    height:10px;
+    margin-left: auto;
+    margin-right: auto;
+    animation: spin 2s linear infinite;
+}
 .loadingpage{
     color:  #152950;
     font-size: 20px;
