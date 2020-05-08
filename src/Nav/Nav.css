@@ -1,7 +1,7 @@
 #mainTitle, #mainTitle>a:visited, #mainTitle>a:active, #mainTitle>a:hover{
     margin-top: 30px;
     font-size: 35px;
-    color: white 
+    color: white !important
 }
 
 
