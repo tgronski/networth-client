@@ -36,7 +36,12 @@ export default class Networth extends Component {
         showDescription:false,
         advice:[{}],
         calculations:[],
-        wallet:[]
+        wallet:[],
+        CreditCardDebt_disabled:false,
+        InvestmentsStocksBonds_disabled:false,
+        Loans_disabled:false,
+        Savings_disabled:false,
+        total_disabled:false
     }
   }
   static contextType = ApiContext 
@@ -73,18 +78,28 @@ export default class Networth extends Component {
     .then(res=>
       this.setState({entries: [res],error: '', total: ''})  
     )
-   
-
-  }
+    .then(res=>
+     {if(this.state.entries[0] != null && this.state.entries[0].length<12){
+      this.setState({total_disabled:false})}
+      
+  })
+  console.log(this.state)
+}
   handleNetworth=(e)=>{
     e.preventDefault();
     let name= (e.target.name).replace(/[\s()/]/g,'')
-    let value=(e.target.value).replace(/[^0-9.-]+/g,'')
-    if(value===''){
+    let value=(e.target.value)
+    this.setState({error:''})
+    if(value<0 || value.includes('-')){
+      this.setState({error: 'No negative values',[`${name}_disabled`]: true})
+    }
+    else if(value===''){
       value=0
     }
+    if(value>=0){
+      this.setState({networth: false,[`${name}`]: value,total: '',[`${name}_disabled`]: false})
+    }
 
-    this.setState({networth: false, [`${name}`]: value, total: ''})
   }
 
 
@@ -106,11 +121,12 @@ export default class Networth extends Component {
     let networth_savings=savings
     if(this.state.entries[0] != null && this.state.entries[0].length>=12){
       this.setState({error: `The maximum historical networth is 12. Please delete some of your past entries below`, 
+      total_disabled:true,
       total: ''})
     }
-    else (this.setState({total: total}))
-      CalculationApiService.postCalculations(networth_total,networth_total_value , networth_investments, networth_loans, 
+    else (CalculationApiService.postCalculations(networth_total,networth_total_value , networth_investments, networth_loans, 
     networth_credits, networth_savings) 
+    .then(res=>this.setState({total: total})))
     .catch(res=>{
       this.setState({error: res.error})
     })
@@ -121,7 +137,8 @@ export default class Networth extends Component {
     .then(res=>{
       if(this._mounted) {
         this.setState({entries: [res]})
-      }}
+      }
+      }
       )
     .catch(res=>{
       this.setState({error: res.error})
@@ -193,8 +210,16 @@ export default class Networth extends Component {
             :(null
             )
           }
-          <button type="submit" className='submitButton' onClick={e=>this.handleSubmit(e)}>Submit</button>
-          {this.state.error !=''
+          {this.state.CreditCardDebt_disabled===false &&
+          this.state.InvestmentsStocksBonds_disabled===false &&
+          this.state.Loans_disabled===false &&
+          this.state.Savings_disabled===false && 
+          this.state.total_disabled===false
+            ?(<button type="submit" className='submitButton' onClick={e=>this.handleSubmit(e)}>Submit</button>
+            )
+            : <span><p  className='disabled_submitButton' >Submit</p></span>
+          }          
+          {this.state.error !==''
           ? (          <p>{this.state.error}</p>)
           : (          <p>Total Net Worth: {this.state.total}</p>
             )}

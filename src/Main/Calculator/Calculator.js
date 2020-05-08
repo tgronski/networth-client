@@ -35,7 +35,6 @@ export default class Calculator extends Component {
     e.preventDefault();
     let name= (e.target.name).replace(/[\s()/]/g,'')
     let value=(e.target.value)
-    console.log(value)
     if(value<0 || value.includes('-')){
       this.setState({error: 'No negative values',[`${name}_disabled`]: true})
     }
