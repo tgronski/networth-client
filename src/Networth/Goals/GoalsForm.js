@@ -75,7 +75,6 @@ export default class GoalsForm extends Component {
   };
 
   componentWillUnmount() {
-    console.log("unmounted");
     this._mounted = false;
   }
 

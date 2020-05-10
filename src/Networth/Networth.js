@@ -100,7 +100,6 @@ export default class Networth extends Component {
           this.setState({ total_disabled: false });
         }
       });
-    console.log(this.state);
   };
   handleNetworth = (e) => {
     e.preventDefault();
