@@ -1,20 +1,16 @@
-import TokenService from '../services/token-service'
-import config from '../config'
+import TokenService from "../services/token-service";
+import config from "../config";
 
 const WalletsApiService = {
   getWallets() {
     return fetch(`${config.API_ENDPOINT}/api/wallets`, {
       headers: {
-        'authorization': `bearer ${TokenService.getAuthToken()}`,
+        authorization: `bearer ${TokenService.getAuthToken()}`,
       },
-    })
-      .then(res =>
-        (!res.ok)
-          ? res.json().then(e => Promise.reject(e))
-          : res.json()
-      )
+    }).then((res) =>
+      !res.ok ? res.json().then((e) => Promise.reject(e)) : res.json()
+    );
   },
+};
 
-}
-
-export default WalletsApiService
+export default WalletsApiService;

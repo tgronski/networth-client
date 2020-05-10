@@ -1,10 +1,10 @@
-import React from 'react'
+import React from "react";
 
 export default React.createContext({
   entries: [{}],
-  handleDeleteEntry:()=>{},
-  goals: [{}], 
-  handleDeleteGoal: ()=>{},
-  advice:[{}],
-  delete_loader: Boolean
-})
+  handleDeleteEntry: () => {},
+  goals: [{}],
+  handleDeleteGoal: () => {},
+  advice: [{}],
+  delete_loader: Boolean,
+});
