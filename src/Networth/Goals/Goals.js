@@ -45,7 +45,9 @@ export default class Goals extends Component {
                   className="deleteButton"
                   onClick={(e) => this.context.handleDeleteGoal(e)}
                 >
-                  Delete
+                  {this.props.loader
+                  ? (<div className="small-loader"></div>)
+                  : 'Delete'}
                 </button>
               </li>
             ))}

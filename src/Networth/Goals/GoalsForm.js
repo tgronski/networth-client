@@ -14,6 +14,7 @@ export default class GoalsForm extends Component {
       goal_value: "",
       error: "",
       id: 0,
+      loader: false
     };
   }
 
@@ -32,7 +33,7 @@ export default class GoalsForm extends Component {
     this._mounted = true;
     GoalsApiService.getGoals().then((res) => {
       if (this._mounted) {
-        this.setState({ goals: [res] });
+        this.setState({ goals: [res], loader: false });
       }
     });
   }
@@ -40,6 +41,7 @@ export default class GoalsForm extends Component {
   handleDeleteGoal = (e) => {
     e.preventDefault();
     let id = e.target.id;
+    this.setState({loader: true})
     GoalsApiService.deleteGoals(id);
   };
 
@@ -54,6 +56,7 @@ export default class GoalsForm extends Component {
     let recentValue = null;
     let goal_name = this.state.goal_name;
     let goal_value = this.state.goal_value;
+    this.setState({loader: true})
     if (this.context.entries[0] != null && this.context.entries[0].length > 0) {
       number = this.context.entries[0].length;
       recentValue = this.context.entries[0][number - 1];
@@ -128,7 +131,9 @@ export default class GoalsForm extends Component {
 
                 <br />
                 <button className="submitButton" type="submit">
-                  Add Goal
+                  {this.state.loader
+                  ? (<div className="small-loader"></div>)
+                  : 'Add Goal'}
                 </button>
                 <div>
                   {goals[0].length <= 2 ? null : <p>{this.state.error}</p>}
@@ -136,7 +141,7 @@ export default class GoalsForm extends Component {
               </form>
             </div>
 
-            <Goals />
+            <Goals loader={this.state.loader} />
             <GoalsWheel />
           </div>
         </div>
