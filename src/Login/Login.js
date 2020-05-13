@@ -14,6 +14,7 @@ export default class Login extends Component {
     super(props);
     this.state = {
       error: null,
+      loader: false,
     };
   }
 
@@ -29,7 +30,7 @@ export default class Login extends Component {
 
   handleSubmitJwtAuth = (ev) => {
     ev.preventDefault();
-    this.setState({ error: null });
+    this.setState({ error: null, loader: true });
     const { user_name, password } = ev.target;
     AuthApiService.postLogin({
       user_name: user_name.value.toLowerCase(),
@@ -42,7 +43,7 @@ export default class Login extends Component {
         this.handleLoginSuccess();
       })
       .catch((res) => {
-        this.setState({ error: res.error });
+        this.setState({ error: res.error, loader: false });
       });
   };
 
@@ -73,7 +74,9 @@ export default class Login extends Component {
             ></input>
           </div>
           <button className="submitButton" type="submit">
-            Login
+            {this.state.loader 
+            ? <div className="small-loader"></div> 
+            : "Login"}
           </button>
         </form>
       </div>

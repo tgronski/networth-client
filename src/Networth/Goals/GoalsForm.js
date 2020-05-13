@@ -14,7 +14,8 @@ export default class GoalsForm extends Component {
       goal_value: "",
       error: "",
       id: 0,
-      loader: false
+      loader: false,
+      deleteloader:false
     };
   }
 
@@ -33,7 +34,7 @@ export default class GoalsForm extends Component {
     this._mounted = true;
     GoalsApiService.getGoals().then((res) => {
       if (this._mounted) {
-        this.setState({ goals: [res], loader: false });
+        this.setState({ goals: [res], loader: false, deleteloader: false });
       }
     });
   }
@@ -41,8 +42,8 @@ export default class GoalsForm extends Component {
   handleDeleteGoal = (e) => {
     e.preventDefault();
     let id = e.target.id;
-    this.setState({loader: true})
-    GoalsApiService.deleteGoals(id);
+    this.setState({deleteloader: true})
+    GoalsApiService.deleteGoals(id)
   };
 
   handleGoal = (e) => {
@@ -141,7 +142,7 @@ export default class GoalsForm extends Component {
               </form>
             </div>
 
-            <Goals loader={this.state.loader} />
+            <Goals loader={this.state.deleteloader} />
             <GoalsWheel />
           </div>
         </div>
