@@ -9,8 +9,6 @@ export default class Main extends Component {
     return (
       <div className="Main">
         <Calculator />
-        <br />
-        <br />
         <Preview />
         <br />
         <Testamonials />

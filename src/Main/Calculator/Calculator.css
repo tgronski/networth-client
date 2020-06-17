@@ -11,7 +11,6 @@
     margin: auto;
     color: #152950;
     background-size: 52%;
-    height: 550px;
 }
 
 .background{
@@ -19,14 +18,22 @@
     width: 80%;
     margin-left: auto;
     margin-right: auto;
-    height: 100%
+  
 }
-
+.preview-form{
+    max-width: 240px;
+    display: flex;
+    justify-self: center;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin: 0 auto;
+}
 
 
 @media only screen and (min-width:800px) {
     .Calculator{
-        height: 425px;
+        height: 500px;
 
     }
     .background{
@@ -37,11 +44,22 @@
 
 @media only screen and (min-width:500px)and (max-width:799px) {
     .Calculator{
-        height: 500px;
+        height: 485px;
 
     }
     .background{
 
         width: 70%;
+    }
+}
+
+@media only screen (min-width: 319px) and (max-width:499px) {
+    .Calculator{
+        height: 500px;
+
+    }
+    .background{
+
+        width: 40% ;
     }
 }

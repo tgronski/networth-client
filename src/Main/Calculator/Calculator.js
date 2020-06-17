@@ -94,7 +94,7 @@ export default class Calculator extends Component {
             <form className="CalculatorForm">
               <p className="preview">Try out the net-worth-calculator:</p>
               {wallets ? (
-                <div>
+                <div className='preview-form'>
                   {wallets.map((wallet) => (
                     <div key={wallet.id}>
                       <br />
