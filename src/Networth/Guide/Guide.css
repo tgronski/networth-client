@@ -23,9 +23,13 @@ justify-content: space-evenly;
 .spacing{
     display: none;
 }
-.Guide-ul>a,.Guide, .Guide-List>a:hover, .Guide-List>a, .Guide-List>a:active, .Guide-List>a:visited{
+.Guide-ul>a,.Guide,  .Guide-List>a, .Guide-List>a:active, .Guide-List>a:visited{
     color:white;
 
+
+}
+.Guide-List>a:hover{
+    color: #152950;
 }
 @media only screen and (min-width: 700px) {
     .Guide{
