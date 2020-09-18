@@ -15,7 +15,7 @@ export default class Menu extends Component {
   }
 
   handleDropDown = () => {
-    if (this.state.showDropDown === false) {
+    if (!this.state.showDropDown) {
       this.setState({ showDropDown: true });
     } else this.setState({ showDropDown: false });
   };
@@ -38,7 +38,7 @@ export default class Menu extends Component {
       { id: 2, name: "Create an Account", path: "/register" },
       { id: 3, name: "Log In", path: "/login" },
     ];
-    if (TokenService.hasAuthToken() === true) {
+    if (TokenService.hasAuthToken()) {
       data = [
         { id: 1, name: "About", path: "/about" },
         { id: 3, name: "Networth", path: "/networth" },
