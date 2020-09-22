@@ -39,11 +39,9 @@ export default class GoalsForm extends Component {
     });
   }
 
-  handleDeleteGoal = (e) => {
-    e.preventDefault();
-    let id = e.target.id;
+  handleDeleteGoal = ({target}) => {
     this.setState({deleteloader: true})
-    GoalsApiService.deleteGoals(id)
+    GoalsApiService.deleteGoals(target.id)
   };
 
   handleGoal = (e) => {
